@@ -36,7 +36,7 @@
             <Popper>
               {{ student.favoriteSports[0] }}...
               <font-awesome-icon icon="fa-regular fa-square-caret-down" />
-              <template>
+              <template #content>
                 <ul>
                   <li v-for="sports in student.favoriteSports" :key="sports">{{ sports }}</li>
                 </ul>
