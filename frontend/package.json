@@ -1,11 +1,13 @@
 {
   "name": "students",
   "version": "0.1.0",
+  "homepage": "https://khitrovmaksim.github.io/students/",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "github": "gh-pages -d dist"
   },
   "dependencies": {
     "@popperjs/core": "^2.11.6",
@@ -22,6 +24,7 @@
     "@vue/compiler-sfc": "^3.0.0-0",
     "babel-eslint": "^10.1.0",
     "eslint": "^6.7.2",
-    "eslint-plugin-vue": "^9.6.0"
+    "eslint-plugin-vue": "^9.6.0",
+    "gh-pages": "^4.0.0"
   }
 }
