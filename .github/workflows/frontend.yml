@@ -1,6 +1,7 @@
 name: deploy frontend to github pages
 
 on:
+  workflow_dispatch:
   push:
     paths:
       - 'frontend/**'
