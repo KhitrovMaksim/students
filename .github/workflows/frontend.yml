@@ -12,14 +12,12 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-        with:
-          path: frontend
 
       - name: Install and Build
         run: |
-          cd frontend
           npm ci
           npm run build
+        working-directory: ./frontend
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@v4.3.0
         with:
