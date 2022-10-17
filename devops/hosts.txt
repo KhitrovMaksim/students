@@ -1,1 +1,8 @@
-[development_server]
+[DEVELOPMENT_SERVER]
+development
+
+[DEVELOPMENT_SERVER:vars]
+ansible_host=host
+ansible_connection=ssh
+ansible_ssh_user=user
+ansible_ssh_pass=password

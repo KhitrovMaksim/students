@@ -27,5 +27,5 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Ansible ping test server
-        run: ansible all -i '92.53.124.201,' -m ping
+        run: ansible all -i '92.53.124.201,' -m ping -e "ansible_ssh_user=${TEST_SERVER_LOGIN} ansible_ssh_pass=${TEST_SERVER_PASSWORD}"
         working-directory: ./devops
