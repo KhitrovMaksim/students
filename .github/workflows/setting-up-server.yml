@@ -15,6 +15,18 @@ jobs:
   setup-runner:
     runs-on: ubuntu-latest
     steps:
+      - name: Creating id_rsa
+        run: |
+          echo ${{ TEST_SERVER_PUBLIC_KEY }} > id_rsa
+
+      - name: Checking if create id_rsa
+        run: |
+          ls -ls
+
+      - name: Checking if create id_rsa
+        run: |
+          cat id_rsa
+
       - name: Install ansible
         run: |
           sudo apt install software-properties-common
