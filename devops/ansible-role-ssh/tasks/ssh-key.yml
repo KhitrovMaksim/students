@@ -1,3 +1,4 @@
+---
 - name: Create file
   file:
     path: "/home/id_rsa"
