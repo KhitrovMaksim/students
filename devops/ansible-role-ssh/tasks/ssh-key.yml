@@ -1,16 +1,21 @@
 - name: Touch a file, using symbolic modes to set the permissions (equivalent to 0644)
   ansible.builtin.file:
-    path: /etc/id_rsa.pub
+    path: /etc/id_rsa
     state: touch
     mode: u=rw,g=r,o=r
 
+- name: Show file 1
+  ansible.builtin.debug:
+    msg: "{{ lookup('ansible.builtin.file', '/etc/id_rsa') }}"
+
 - name: Copy authorized key from env to file.
   copy:
-    dest: /etc/id_rsa.pub
+    dest: /etc/id_rsa
     content: "{{ ssh_key }}"
 
-- ansible.builtin.debug:
-    msg: "{{ lookup('ansible.builtin.file', '/etc/id_rsa.pub') }}"
+- name: Show file 2
+  ansible.builtin.debug:
+    msg: "{{ lookup('ansible.builtin.file', '/etc/id_rsa') }}"
 
 - name: Set authorized key for remote user.
   authorized_key:
