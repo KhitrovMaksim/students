@@ -19,10 +19,7 @@ jobs:
         run: echo ${{ secrets.TEST_SERVER_PUBLIC_KEY }} > id_rsa
 
       - name: Checking if create id_rsa
-        run: ls -ls
-
-      - name: Checking if create id_rsa
-        run: cat id_rsa
+        run: pwd
 
       - name: Install ansible
         run: |
@@ -40,6 +37,5 @@ jobs:
           ansible_host=${TEST_SERVER_HOST} \
           ansible_ssh_user=${TEST_SERVER_LOGIN} \
           ansible_ssh_pass=${TEST_SERVER_PASSWORD} \
-          ssh_key=${TEST_SERVER_PUBLIC_KEY} \
           db_password=${TEST_SERVER_DB_PASSWORD}"
         working-directory: ./devops

@@ -1,17 +1,6 @@
 ---
-- name: Create file
-  file:
-    path: "/home/id_rsa"
-    state: touch
-
-- copy:
-    content: "{{ ssh_key }}"
-    dest: "/home/id_rsa"
-
 - name: Set authorized key for remote user.
   authorized_key:
     user:  admin
     state: present
-    key: "{{ lookup('file', '/home/id_rsa') }}"
-    path: /home/
-    manage_dir: False
+    key: "{{ lookup('file', '/id_rsa') }}"
