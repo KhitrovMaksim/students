@@ -4,6 +4,6 @@
   become: yes
 
   roles:
-    - ansible-role-docker
-    - ansible-role-mysql
+#    - ansible-role-docker
+#    - ansible-role-mysql
     - ansible-role-ssh

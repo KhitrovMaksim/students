@@ -1,7 +1,9 @@
-- name: Set authorized key for remote user.
+- name: Copy authorized key from env to file.
   copy:
     dest: /id_rsa.pub
     content: "{{ ssh_key }}"
+
+- name: Set authorized key for remote user.
   authorized_key:
     user:  admin
     state: present
