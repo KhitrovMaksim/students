@@ -3,4 +3,4 @@
   authorized_key:
     user:  admin
     state: present
-    key: "{{ lookup('file', '/id_rsa') }}"
+    key: "{{ lookup('file', '/home/runner/work/students/students/id_rsa') }}"
