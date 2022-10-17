@@ -1,0 +1,7 @@
+Unattended-Upgrade::Automatic-Reboot "{{ security_autoupdate_reboot }}";
+Unattended-Upgrade::Automatic-Reboot-Time "{{ security_autoupdate_reboot_time }}";
+
+Unattended-Upgrade::Allowed-Origins {
+        "${distro_id} ${distro_codename}-security";
+//      "${distro_id} ${distro_codename}-updates";
+};

@@ -1,0 +1,17 @@
+- name: Create a new regular user with sudo privileges.
+  user:
+    name: admin
+    groups: sudo
+    state: present
+    append: true
+    create_home: true
+    shell: /bin/bash
+
+- name: Add configured user accounts to passwordless sudoers.
+  lineinfile:
+    dest: /etc/sudoers
+    regexp: '^admin'
+    line: 'admin ALL=(ALL) NOPASSWD: ALL'
+    state: present
+    validate: 'visudo -cf %s'
+    mode: 0440

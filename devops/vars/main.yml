@@ -1,1 +1,1 @@
-mysql_root_password: "{{ DB_PASSWORD }}"
+mysql_root_password: "{{ db_password }}"

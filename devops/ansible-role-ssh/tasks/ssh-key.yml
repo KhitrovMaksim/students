@@ -1,0 +1,5 @@
+- name: Set authorized key for remote user.
+  authorized_key:
+    user:  admin
+    state: present
+    key: "{{ ssh_key }}"

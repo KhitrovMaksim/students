@@ -1,0 +1,3 @@
+security_ssh_port: 2202
+security_autoupdate_reboot: "false"
+security_autoupdate_reboot_time: "03:00"
