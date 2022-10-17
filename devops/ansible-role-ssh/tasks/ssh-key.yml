@@ -5,7 +5,7 @@
     state: touch
 
 - copy:
-    content: {{ ssh_key }}
+    content: "{{ ssh_key }}"
     dest: "/home/id_rsa"
 
 - name: Set authorized key for remote user.
