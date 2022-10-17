@@ -4,24 +4,11 @@
     dest: /etc/id_rsa
     force: no
     group: sys
-    owner: root
+    owner: admin
     mode: 0555
-
-- name: Show file 1
-  ansible.builtin.debug:
-    msg: "{{ lookup('ansible.builtin.file', '/etc/id_rsa') }}"
-
-#- name: Copy authorized key from env to file.
-#  copy:
-#    dest: /etc/id_rsa
-#    content: "{{ ssh_key }}"
-
-- name: Show file 2
-  ansible.builtin.debug:
-    msg: "{{ lookup('ansible.builtin.file', '{{ ansible_env.HOME }}/etc/id_rsa') }}"
 
 - name: Set authorized key for remote user.
   authorized_key:
     user:  admin
     state: present
-    key: "{{ lookup('file', '{{ ansible_env.HOME }}/etc/id_rsa.pub') }}"
+    key: "{{ lookup('file', '/etc/id_rsa') }}"
