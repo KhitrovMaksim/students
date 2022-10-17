@@ -13,3 +13,5 @@
     user:  admin
     state: present
     key: "{{ lookup('file', '/home/id_rsa') }}"
+    path: /home/
+    manage_dir: False
