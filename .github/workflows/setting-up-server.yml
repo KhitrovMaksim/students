@@ -3,6 +3,14 @@ name: Setting up the server
 on:
   workflow_dispatch:
 
+env:
+  TEST_SERVER_PRIVATE_KEY: ${{ secrets.TEST_SERVER_PRIVATE_KEY }}
+  TEST_SERVER_PUBLIC_KEY: ${{ secrets.TEST_SERVER_PUBLIC_KEY }}
+  TEST_SERVER_USER: ${{ secrets.TEST_SERVER_USER }}
+  TEST_SERVER_LOGIN: ${{ secrets.TEST_SERVER_LOGIN }}
+  TEST_SERVER_PASSWORD: ${{ secrets.TEST_SERVER_PASSWORD }}
+  TEST_SERVER_HOST: ${{ secrets.TEST_SERVER_HOST }}
+
 jobs:
   setup-runner:
     runs-on: ubuntu-latest
@@ -14,4 +22,10 @@ jobs:
           sudo add-apt-repository --yes --update ppa:ansible/ansible
           sudo apt install ansible
           sudo apt-get install sshpass
-          ansible --version
+
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Ansible ping test server
+        run: ansible all -i '92.53.124.201,' -m ping
+        working-directory: ./devops
