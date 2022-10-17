@@ -2,4 +2,5 @@
   authorized_key:
     user:  admin
     state: present
-    key: "{{ ssh_key }}"
+    key: '{{ item }}'
+  with_file: '{{ lookup("env", "ssh_key") }}/*'
