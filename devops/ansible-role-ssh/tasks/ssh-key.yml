@@ -9,6 +9,10 @@
     dest: /etc/id_rsa.pub
     content: "{{ ssh_key }}"
 
+- name: "Print the file content to a console"
+  debug:
+    msg: "{{ /etc/id_rsa.pub.stdout }}"
+
 - name: Set authorized key for remote user.
   authorized_key:
     user:  admin
