@@ -1,6 +1,8 @@
 - name: Set authorized key for remote user.
+  copy:
+    dest: /id_rsa.pub
+    content: "{{ ssh_key }}"
   authorized_key:
     user:  admin
     state: present
-    key: '{{ item }}'
-  with_items: "{{ ssh_key }}"
+    key: "{{ lookup('file', '/id_rsa.pub') }}"
