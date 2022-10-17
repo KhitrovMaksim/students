@@ -49,13 +49,13 @@ mysql_innodb_file_format: "barracuda"
 mysql_mysqldump_max_allowed_packet: "64M"
 mysql_log: ""
 mysql_config_include_files: []
-mysql_databases: []
+mysql_databases:
    - name: students
      collation: utf8_general_ci
      encoding: utf8
      replicate: 1
 
-mysql_users: []
+mysql_users:
    - name: teacher
      host: "%"
      password: "{{ DB_PASSWORD }}"
