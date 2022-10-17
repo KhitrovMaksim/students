@@ -26,6 +26,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Ansible ping test server
-        run: sudo ansible-playbook playbook.yml -e "ansible_host=${TEST_SERVER_HOST} ansible_ssh_user=${TEST_SERVER_LOGIN} ansible_ssh_pass=${TEST_SERVER_PASSWORD}"
+      - name: Ansible. Installing Docker, MySQL and SSH
+        run: sudo ansible-playbook playbook.yml -e "ansible_host=${TEST_SERVER_HOST} ansible_ssh_user=${TEST_SERVER_LOGIN} ansible_ssh_pass=${TEST_SERVER_PASSWORD} DB_PASSWORD=${TEST_SERVER_DB_PASSWORD}"
         working-directory: ./devops

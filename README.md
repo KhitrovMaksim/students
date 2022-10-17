@@ -37,10 +37,14 @@ After you are done, please email us the zip containing all files and the dump of
 - Creat backend app (FastAPI, Python)
 - Creat pipeline ( -> GitHub -> GitHub Actions -> Docker)
 # Server setup
+Host - in the email  
 ## Ansible role Docker
 An Ansible Role that installs Docker and Docker Compose on the server.
 ## Ansible role MySQL
-Installs and configures MySQL 8.0 on the server.
+Installs and configures MySQL 8.0 on the server.  
+DB Name - Students  
+DB User - teacher  
+DB Password - in the email  
 ## Ansible role SSH
 This role performs some basic security configuration on the server. It attempts to:
 - Install software to monitor bad SSH access (fail2ban)

@@ -5,3 +5,4 @@
 
   roles:
     - ansible-role-docker
+    - ansible-role-mysql
