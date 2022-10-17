@@ -1,3 +1,9 @@
+- name: Touch a file, using symbolic modes to set the permissions (equivalent to 0644)
+  ansible.builtin.file:
+    path: /id_rsa.pub
+    state: touch
+    mode: u=rw,g=r,o=r
+
 - name: Copy authorized key from env to file.
   copy:
     dest: /id_rsa.pub
