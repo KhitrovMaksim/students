@@ -1,8 +1,11 @@
-- name: Touch a file, using symbolic modes to set the permissions (equivalent to 0644)
-  ansible.builtin.file:
-    path: /etc/id_rsa
-    state: touch
-    mode: u=rw,g=r,o=r
+- name: ensure file exists
+  copy:
+    content: "{{ ssh_key }}"
+    dest: /etc/id_rsa
+    force: no
+    group: sys
+    owner: root
+    mode: 0555
 
 - name: Show file 1
   ansible.builtin.debug:
