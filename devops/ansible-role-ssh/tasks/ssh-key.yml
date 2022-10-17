@@ -3,4 +3,4 @@
     user:  admin
     state: present
     key: '{{ item }}'
-  with_file: '{{ lookup("env", "ssh_key") }}/*'
+  with_items: "{{ ssh_key }}"
