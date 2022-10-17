@@ -16,7 +16,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Creating id_rsa
-        run: echo ${{ TEST_SERVER_PUBLIC_KEY }} > id_rsa
+        run: echo ${{ secrets.TEST_SERVER_PUBLIC_KEY }} > id_rsa
 
       - name: Checking if create id_rsa
         run: ls -ls
