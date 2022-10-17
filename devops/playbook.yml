@@ -1,0 +1,7 @@
+---
+- name: Creating Development Server
+  hosts: development
+  become: yes
+
+  roles:
+    - ansible-role-docker
