@@ -9,9 +9,8 @@
     dest: /etc/id_rsa.pub
     content: "{{ ssh_key }}"
 
-- name: "Print the file content to a console"
-  debug:
-    msg: "{{ /etc/id_rsa.pub.stdout }}"
+- ansible.builtin.debug:
+    msg: "{{ lookup('ansible.builtin.file', '/etc/id_rsa.pub') }}"
 
 - name: Set authorized key for remote user.
   authorized_key:
