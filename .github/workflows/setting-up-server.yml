@@ -16,7 +16,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Creating id_rsa
-        run: echo ${{ secrets.TEST_SERVER_PUBLIC_KEY }} > id_rsa
+        run: echo ${{ secrets.TEST_SERVER_PUBLIC_KEY }} > /home/runner/id_rsa
 
       - name: Checking if create id_rsa
         run: pwd
@@ -24,8 +24,18 @@ jobs:
       - name: Checking if create id_rsa
         run: ls -la
 
+      - name: Checking if create id_rsa
+        run: |
+          cd /home/runner
+          pwd
+          ls -la
+          cat id_rsa
+
       - name: Echo HOME
         run: echo "$HOME"
+
+      - name: Echo HOME
+        run: cat id_rsa
 
       - name: Install ansible
         run: |
