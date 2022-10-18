@@ -42,4 +42,4 @@ jobs:
             docker kill $(docker ps -q)
             docker rm $(docker ps -a -q)
             docker rmi $(docker images -q)
-            docker run -d --rm -p 8080:80 ghcr.io/khitrovmaksim/students_frontend:latest
+            docker run -d --rm -p 80:80 ghcr.io/khitrovmaksim/students_frontend:latest
