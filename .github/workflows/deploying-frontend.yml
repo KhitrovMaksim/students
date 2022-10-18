@@ -23,7 +23,7 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v3
         with:
-          context: ./frontend
+          context: "{{defaultContext}}:frontend"
           file: ./Dockerfile
           builder: ${{ steps.buildx.outputs.name }}
           push: true
