@@ -16,12 +16,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 
-#      - name: Install ansible
-#        run: |
-#          sudo apt install software-properties-common
-#          sudo add-apt-repository --yes --update ppa:ansible/ansible
-#          sudo apt install ansible
-#          sudo apt-get install sshpass
+      - name: Install ansible
+        run: |
+          sudo apt install software-properties-common
+          sudo add-apt-repository --yes --update ppa:ansible/ansible
+          sudo apt install ansible
+          sudo apt-get install sshpass
 
       - name: Checkout
         uses: actions/checkout@v3
@@ -30,15 +30,12 @@ jobs:
         run: |
           cd devops/
           echo ${{ secrets.TEST_SERVER_PUBLIC_KEY }} > id_rsa
-          pwd
-          ls -la
 
-#      - name: Ansible. Installing Docker, MySQL and SSH
-#        run: |
-#          sudo ansible-playbook playbook.yml -e "\
-#          ansible_host=${TEST_SERVER_HOST} \
-#          ansible_ssh_user=${TEST_SERVER_LOGIN} \
-#          HOME=/home/runner \
-#          ansible_ssh_pass=${TEST_SERVER_PASSWORD} \
-#          db_password=${TEST_SERVER_DB_PASSWORD}" -vvvvv
-#        working-directory: ./devops
+      - name: Ansible. Installing Docker, MySQL and SSH
+        run: |
+          sudo ansible-playbook playbook.yml -e "\
+          ansible_host=${TEST_SERVER_HOST} \
+          ansible_ssh_user=${TEST_SERVER_LOGIN} \
+          ansible_ssh_pass=${TEST_SERVER_PASSWORD} \
+          db_password=${TEST_SERVER_DB_PASSWORD}"
+        working-directory: ./devops
