@@ -35,5 +35,5 @@ jobs:
           ansible_ssh_user=${TEST_SERVER_LOGIN} \
           HOME=/home/runner \
           ansible_ssh_pass=${TEST_SERVER_PASSWORD} \
-          db_password=${TEST_SERVER_DB_PASSWORD}"
+          db_password=${TEST_SERVER_DB_PASSWORD}" -vvvvv
         working-directory: ./devops
