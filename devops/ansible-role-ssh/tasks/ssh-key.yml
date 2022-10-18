@@ -1,17 +1,6 @@
 ---
-- name: Find out playbooks path
-  shell: pwd
-  register: playbook_path_output
-
-- name: Output pwd
-  debug: var=playbook_path_output.stdout
-
-- name: Basic usage
-  ansible.builtin.debug:
-    msg: "{{ lookup('ansible.builtin.env', 'HOME') }}"
-
-#- name: Set authorized key for remote user.
-#  authorized_key:
-#    user:  admin
-#    state: present
-#    key: "{{ lookup('file', lookup('env','HOME') + '/id_rsa') }}"
+- name: Set authorized key for remote user.
+  authorized_key:
+    user:  admin
+    state: present
+    key: "{{ lookup('file', lookup('env','HOME') + '/id_rsa') }}"
