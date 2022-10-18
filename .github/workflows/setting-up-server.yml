@@ -30,6 +30,8 @@ jobs:
         run: |
           cd devops/
           echo ${{ secrets.TEST_SERVER_PUBLIC_KEY }} > id_rsa
+          export MY_RSA=$(cat id_rsa)
+          echo $MY_RSA
 
       - name: Ansible. Installing Docker, MySQL and SSH
         run: |
