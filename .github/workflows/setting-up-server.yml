@@ -10,6 +10,7 @@ env:
   TEST_SERVER_LOGIN: ${{ secrets.TEST_SERVER_LOGIN }}
   TEST_SERVER_PASSWORD: ${{ secrets.TEST_SERVER_PASSWORD }}
   TEST_SERVER_HOST: ${{ secrets.TEST_SERVER_HOST }}
+  TEST_SERVER_DB_PASSWORD: ${{ secrets.TEST_SERVER_DB_PASSWORD }}
 
 jobs:
   setup-runner:
