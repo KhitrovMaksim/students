@@ -57,9 +57,9 @@ mysql_databases:
 
 mysql_users:
    - name: teacher
-     host: "%"
+     host: "localhost"
      password: "{{ db_password }}"
-     priv: "students.*:ALL"
+     priv: "*.*:ALL"
 
 mysql_disable_log_bin: false
 mysql_server_id: "1"
