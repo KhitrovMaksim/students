@@ -2,16 +2,16 @@
 # Security
 
 ## Fail2Ban
-#- include_tasks: fail2ban.yml
+- include_tasks: fail2ban.yml
 
 ## Users and groups
-#- include_tasks: users.yml
+- include_tasks: users.yml
 
 ## SSH key
 - include_tasks: ssh-key.yml
 
 ## Login settings
-#- include_tasks: ssh.yml
+- include_tasks: ssh.yml
 
 ## Autoupdate
-#- include_tasks: autoupdate.yml
+- include_tasks: autoupdate.yml
