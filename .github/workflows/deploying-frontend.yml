@@ -28,3 +28,16 @@ jobs:
           builder: ${{ steps.buildx.outputs.name }}
           push: true
           tags: ghcr.io/khitrovmaksim/students_frontend:latest
+
+      - name: Run
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.TEST_SERVER_HOST }}
+          username: admin
+          key: ${{ secrets.TEST_SERVER_PRIVATE_KEY }}
+          port: 2202
+          script: |
+            export CR_PAT=${{ secrets.GITHUB_TOKEN }}
+            echo $CR_PAT | docker login ghcr.io -u khitrovmaksim --password-stdin
+            docker stop ghcr.io/khitrovmaksim/students_frontend:latest
+            docker run -d --rm -p 80:80 ghcr.io/khitrovmaksim/students_frontend:latest
