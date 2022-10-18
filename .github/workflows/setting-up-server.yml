@@ -21,6 +21,9 @@ jobs:
       - name: Checking if create id_rsa
         run: pwd
 
+      - name: Checking if create id_rsa
+        run: ls -la
+
       - name: Install ansible
         run: |
           sudo apt install software-properties-common

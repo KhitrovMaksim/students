@@ -5,8 +5,12 @@
 
 - debug: var=playbook_path_output.stdout
 
-- name: Set authorized key for remote user.
-  authorized_key:
-    user:  admin
-    state: present
-    key: "{{ lookup('file', lookup('env','HOME') + '/id_rsa') }}"
+- name: Basic usage
+  ansible.builtin.debug:
+    msg: "'{{ lookup('ansible.builtin.env', 'HOME') }}' is the HOME environment variable."
+
+#- name: Set authorized key for remote user.
+#  authorized_key:
+#    user:  admin
+#    state: present
+#    key: "{{ lookup('file', lookup('env','HOME') + '/id_rsa') }}"
