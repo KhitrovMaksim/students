@@ -24,6 +24,12 @@ jobs:
       - name: Checking if create id_rsa
         run: ls -la
 
+      - name: Echo HOME
+        run: echo "$HOME"
+
+      - name: Echo
+        run: echo "$GITHUB_CONTEXT"
+
       - name: Install ansible
         run: |
           sudo apt install software-properties-common
