@@ -26,8 +26,12 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Show CHECKOUT
-        run: ls -ls
+      - name: Creating id_rsa
+        run: |
+          cd devops/
+          echo ${{ secrets.TEST_SERVER_PUBLIC_KEY }} > id_rsa
+          pwd
+          ls -la
 
 #      - name: Ansible. Installing Docker, MySQL and SSH
 #        run: |
