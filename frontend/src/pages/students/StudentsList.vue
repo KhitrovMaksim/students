@@ -1,16 +1,18 @@
 <template>
-  <main class="container mt-4">
+  <main class="container">
+
     <nav class="navbar navbar-expand my-3">
       <div class="container-fluid">
         <h2>List of Students</h2>
         <router-link to="/add" class="btn btn-warning">
-          Add new student
+          Add a new student
         </router-link>
       </div>
     </nav>
 
-    <div class="table-responsive">
+    <div class="table-responsive-lg">
       <table class="table table-striped table-sm table-hover">
+
         <thead>
         <tr>
           <th scope="col">#</th>
@@ -23,6 +25,7 @@
           <th scope="col">Edit</th>
         </tr>
         </thead>
+
         <tbody v-if="hasStudents">
         <tr v-for="student in getStudents" :key="student.id">
           <td>{{ student.id }}</td>
@@ -31,28 +34,44 @@
           <td>{{ student.dateOfBirth }}</td>
           <td>{{ student.email }}</td>
           <td>{{ student.phone }}</td>
-          <td v-if="student.favoriteSports.length < 2">{{ student.favoriteSports[0] }}</td>
+
+          <td v-if="student.favoriteSports.length < 2">
+            {{ student.favoriteSports[0] }}
+          </td>
+
           <td v-else>
+            {{ student.favoriteSports[0] }}...
             <Popper>
-              {{ student.favoriteSports[0] }}...
-              <font-awesome-icon icon="fa-regular fa-square-caret-down" />
+              <font-awesome-icon icon="fa-solid fa-chevron-down" />
               <template #content>
-                <ul>
-                  <li v-for="sports in student.favoriteSports" :key="sports">{{ sports }}</li>
+                <ul class="list-group">
+                  <li v-for="sports in student.favoriteSports" :key="sports" class="list-group-item">
+                    {{ sports }}
+                  </li>
                 </ul>
               </template>
             </Popper>
           </td>
+
           <td>
-            <router-link :to="`/students/${student.id}`" class="link-secondary">
-              <font-awesome-icon icon="fa-solid fa-pen" />
+            <router-link :to="`/students/${student.id}`" class="link-info">
+              <font-awesome-icon icon="fa-solid fa-magnifying-glass" />
+            </router-link>
+            <router-link :to="`/students/${student.id}`" class="link-secondary mx-2">
+              <font-awesome-icon icon="fa-solid fa-pen-to-square" />
+            </router-link>
+            <router-link :to="`/students/${student.id}`" class="link-danger">
+              <font-awesome-icon icon="fa-solid fa-trash-can" />
             </router-link>
           </td>
+
         </tr>
         </tbody>
+
         <tfoot v-else>
           No students
         </tfoot>
+
       </table>
     </div>
   </main>
@@ -79,17 +98,5 @@ export default{
 </script>
 
 <style scoped>
-:deep(.popper) {
-  background: #fff;
-  border-radius: 10px;
-}
 
-:deep(.popper #arrow::before) {
-  background: #fff;
-}
-
-:deep(.popper:hover),
-:deep(.popper:hover > #arrow::before) {
-  background: #fff;
-}
 </style>

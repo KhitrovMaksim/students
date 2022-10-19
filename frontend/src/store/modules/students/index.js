@@ -15,7 +15,7 @@ export default {
                     dateOfBirth: '24/06/1985',
                     email: 'khitrov.maksim@reqres.in',
                     phone: '(111) 111-1111',
-                    favoriteSports: ['Drifting', 'volleyball']
+                    favoriteSports: ['Football', 'Tennis']
                 },
                 {
                     id: '2',
@@ -24,7 +24,7 @@ export default {
                     dateOfBirth: '12/10/1970',
                     email: 'michael.lawson@reqres.in',
                     phone: '(999) 999-9999',
-                    favoriteSports: ['Football']
+                    favoriteSports: ['Golf']
                 }
             ]
         }

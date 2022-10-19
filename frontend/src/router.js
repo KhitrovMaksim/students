@@ -11,7 +11,7 @@ const router = createRouter({
     routes: [
         { path: '/', redirect: '/students'  },
         { path: '/students', component: StudentsList },
-        { path: '/students/:id', component: StudentManaging },
+        { path: '/students/:id', component: StudentManaging, props: true },
         { path: '/add', component: StudentAdd },
         { path: '/:notFound(.*)', component: NotFound }
     ]
