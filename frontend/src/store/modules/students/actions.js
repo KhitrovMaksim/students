@@ -11,5 +11,8 @@ export default {
         }
 
         context.commit('addStudent', studentData)
+    },
+    removeStudent(context, payload) {
+        context.commit('deleteStudent', payload)
     }
 };

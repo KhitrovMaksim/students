@@ -11,7 +11,7 @@
     </nav>
 
     <div class="table-responsive-lg">
-      <table class="table table-striped table-sm table-hover">
+      <table class="table table-sm table-hover">
 
         <thead>
         <tr>
@@ -22,7 +22,7 @@
           <th scope="col">Email Address</th>
           <th scope="col">Phone Number</th>
           <th scope="col">Favorite sports</th>
-          <th scope="col">Edit</th>
+          <th scope="col"></th>
         </tr>
         </thead>
 
@@ -54,23 +54,23 @@
           </td>
 
           <td>
-            <router-link :to="`/students/${student.id}`" class="link-info">
+            <router-link :to="`/students/${student.id}`" class="btn btn-outline-info">
               <font-awesome-icon icon="fa-solid fa-magnifying-glass" />
             </router-link>
-            <router-link :to="`/students/${student.id}`" class="link-secondary mx-2">
+            <router-link :to="`/students/${student.id}`" class="btn btn-outline-warning mx-2">
               <font-awesome-icon icon="fa-solid fa-pen-to-square" />
             </router-link>
-            <router-link :to="`/students/${student.id}`" class="link-danger">
+            <button class="btn btn-outline-danger" @click="remove(student.id)">
               <font-awesome-icon icon="fa-solid fa-trash-can" />
-            </router-link>
+            </button>
           </td>
 
         </tr>
         </tbody>
 
-        <tfoot v-else>
-          No students
-        </tfoot>
+        <caption v-else class="mt-4">
+          There are no students on this list.
+        </caption>
 
       </table>
     </div>
@@ -91,6 +91,11 @@ export default{
     },
     hasStudents() {
       return this.$store.getters['students/hasStudents']
+    }
+  },
+  methods: {
+    remove(studentId) {
+      this.$store.dispatch('students/removeStudent', {Id: studentId})
     }
   }
 
