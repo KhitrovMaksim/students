@@ -5,6 +5,7 @@ import StudentsList from "@/pages/students/StudentsList";
 import StudentAdd from "@/pages/students/StudentAdd";
 import About from "@/pages/About";
 import StudentView from "@/pages/students/StudentView";
+import StudentManaging from "@/pages/students/StudentManaging";
 
 
 const router = createRouter({
@@ -13,7 +14,8 @@ const router = createRouter({
         { path: '/', redirect: '/students'  },
         { path: '/about', component: About  },
         { path: '/students', component: StudentsList },
-        { path: '/students/:id', component: StudentView, props: true },
+        { path: '/students/:id', component: StudentView },
+        { path: '/students/:id/edit', component: StudentManaging },
         { path: '/add', component: StudentAdd },
         { path: '/:notFound(.*)', component: NotFound }
     ]

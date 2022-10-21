@@ -52,19 +52,19 @@
           <div class="col-sm-3">
             <h6 class="mb-0">Favorite sports: </h6>
           </div>
-          <div class="col-sm-9 text-secondary"> {{ selectedStudent.favoriteSports }}</div>
+          <div class="col-sm-9 text-secondary">
+              <span v-for="sport in selectedStudent.favoriteSports" :key="sport" >
+                {{ sport }}<br>
+              </span>
+          </div>
         </div>
         <hr>
         <div class="card-body">
             <router-link to="/students" class="btn btn-outline-primary">Back to list</router-link>
-            <a href="#" class="btn btn-outline-warning mx-2">Edit</a>
+            <router-link :to="`/students/${selectedStudent.id}/edit`" class="btn btn-outline-warning mx-2">Edit</router-link>
             <button class="btn btn-outline-danger" @click="remove(selectedStudent.id)">Delete</button>
-
         </div>
       </div>
-
-
-
     </div>
 
   </main>

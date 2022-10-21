@@ -15,7 +15,7 @@
 
         <div class="text-end">
           <button type="button" class="btn btn-outline-light me-2">Add 20 Students</button>
-          <button type="button" class="btn btn-warning">Clear All</button>
+          <button type="button" class="btn btn-warning" @click="removeAll">Clear All</button>
         </div>
       </div>
     </div>
@@ -39,6 +39,12 @@ export default {
       } else {
         return 'nav-link px-2 text-white'
       }
+    }
+  },
+  methods: {
+    removeAll() {
+      this.$store.dispatch('students/removeAllStudents')
+      this.$router.push('/students')
     }
   }
 }

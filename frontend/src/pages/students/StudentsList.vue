@@ -57,7 +57,7 @@
             <router-link :to="`/students/${student.id}`" class="btn btn-outline-info">
               <font-awesome-icon icon="fa-solid fa-magnifying-glass" />
             </router-link>
-            <router-link :to="`/students/${student.id}`" class="btn btn-outline-warning mx-2">
+            <router-link :to="`/students/${student.id}/edit`" class="btn btn-outline-warning mx-2">
               <font-awesome-icon icon="fa-solid fa-pen-to-square" />
             </router-link>
             <button class="btn btn-outline-danger" @click="remove(student.id)">
@@ -95,7 +95,7 @@ export default{
   },
   methods: {
     remove(studentId) {
-      this.$store.dispatch('students/removeStudent', {Id: studentId})
+      this.$store.dispatch('students/removeStudent', { id: studentId })
     }
   }
 }
