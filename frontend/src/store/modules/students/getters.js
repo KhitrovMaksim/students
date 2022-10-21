@@ -4,5 +4,8 @@ export default {
     },
     hasStudents(state) {
         return state.students && state.students.length > 0;
+    },
+    getStudentById: (state) => (id) => {
+        return state.students.find(student => student.id === id)
     }
 };

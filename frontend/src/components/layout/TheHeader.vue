@@ -9,9 +9,8 @@
         </router-link>
 
         <ul class="nav col-12 col-lg-auto mb-2 justify-content-center mb-md-0">
-          <li><router-link to="/students" class="nav-link px-2 link-secondary">List of students</router-link></li>
-          <li><router-link to="#" class="nav-link px-2 text-white">About</router-link></li>
-          <li><router-link to="#" class="nav-link px-2 text-white">Statistics</router-link></li>
+          <li><router-link to="/students" :class="classForStudentsLink">List of students</router-link></li>
+          <li><router-link to="/about" :class="classForAboutLink">About</router-link></li>
         </ul>
 
         <div class="text-end">
@@ -25,7 +24,23 @@
 
 <script>
 export default {
-  name: "TheHeader"
+  name: "TheHeader",
+  computed: {
+    classForStudentsLink() {
+      if (this.$router.currentRoute.value.fullPath === '/students') {
+        return 'nav-link px-2 link-secondary'
+      } else {
+        return 'nav-link px-2 text-white'
+      }
+    },
+    classForAboutLink() {
+      if (this.$router.currentRoute.value.fullPath === '/about') {
+        return 'nav-link px-2 link-secondary'
+      } else {
+        return 'nav-link px-2 text-white'
+      }
+    }
+  }
 }
 </script>
 

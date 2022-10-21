@@ -98,7 +98,6 @@ export default{
       this.$store.dispatch('students/removeStudent', {Id: studentId})
     }
   }
-
 }
 </script>
 

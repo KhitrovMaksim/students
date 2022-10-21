@@ -7,14 +7,23 @@ import router from "@/router";
 import store from "@/store";
 import Popper from "vue3-popper";
 import { library } from "@fortawesome/fontawesome-svg-core";
-import { faGraduationCap, faPenToSquare, faTrashCan, faChevronDown, faMagnifyingGlass  } from "@fortawesome/free-solid-svg-icons";
+import { faGraduationCap, faPenToSquare, faTrashCan, faChevronDown, faMagnifyingGlass, faUserTie } from "@fortawesome/free-solid-svg-icons";
 import { faSquareCaretDown } from "@fortawesome/free-regular-svg-icons";
 import { faLinkedin, faGithub } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 
 
 
-library.add(faGraduationCap, faSquareCaretDown, faPenToSquare, faTrashCan, faChevronDown, faMagnifyingGlass, faLinkedin, faGithub);
+library.add(
+    faGraduationCap,
+    faSquareCaretDown,
+    faPenToSquare,
+    faTrashCan,
+    faChevronDown,
+    faMagnifyingGlass,
+    faLinkedin,
+    faGithub,
+    faUserTie);
 
 const app = createApp(App);
 
