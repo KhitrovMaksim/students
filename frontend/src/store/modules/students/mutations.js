@@ -12,5 +12,8 @@ export default {
     },
     removeAll(state) {
         state.students = []
+    },
+    addStudents(state, students) {
+        state.students.push(...students)
     }
 };

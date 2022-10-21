@@ -1,5 +1,5 @@
 <template>
-  <main class="container">
+  <main class="container pb-5">
 
     <nav class="navbar navbar-expand my-3">
       <div class="container-fluid">

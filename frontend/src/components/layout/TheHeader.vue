@@ -14,7 +14,7 @@
         </ul>
 
         <div class="text-end">
-          <button type="button" class="btn btn-outline-light me-2">Add 20 Students</button>
+          <button type="button" class="btn btn-outline-light me-2" @click="addTwenty">Add 20 Students</button>
           <button type="button" class="btn btn-warning" @click="removeAll">Clear All</button>
         </div>
       </div>
@@ -44,6 +44,10 @@ export default {
   methods: {
     removeAll() {
       this.$store.dispatch('students/removeAllStudents')
+      this.$router.push('/students')
+    },
+    addTwenty() {
+      this.$store.dispatch('students/addTwenty')
       this.$router.push('/students')
     }
   }
