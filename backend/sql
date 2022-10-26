@@ -1,0 +1,12 @@
+DROP TABLE IF EXISTS `students`;
+
+CREATE TABLE `students` (
+    `id` int(11) NOT NULL AUTO_INCREMENT,
+    `first_name` varchar(200) DEFAULT NULL,
+    `last_name` varchar(200) DEFAULT NULL,
+    `date_of_birth` varchar(200) DEFAULT NULL,
+    `email` varchar(200) DEFAULT NULL,
+    `phone` varchar(200) DEFAULT NULL,
+    `favorite_sports` varchar(200) DEFAULT NULL,
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;

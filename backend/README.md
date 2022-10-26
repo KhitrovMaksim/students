@@ -13,6 +13,8 @@ activate
 deactivate
 pip install fastapi[all]
 uvicorn students:app --reload
+pip install sqlalchemy
+pip install pymysql
 pip install alembic
 alembic init alembic
 ```
@@ -23,4 +25,13 @@ http://127.0.0.1:8000/openapi.json
 GET - get all students / get student by id  
 POST - add new student / add twenty students  
 PUT - edit the student  
-DELETE - remove a student / remove all students  
+DELETE - remove a student / remove all students 
+
+
+## Run mysql on Windows 
+1. Win key + R.
+2. services.msc
+3. Now search for MySQL service based on the version that is installed.
+4. Click on 'stop', 'start' or 'restart' the service option.
+
+## Migrations
