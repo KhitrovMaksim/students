@@ -16,7 +16,8 @@ uvicorn students:app --reload
 pip install sqlalchemy
 pip install pymysql
 pip install alembic
-alembic init alembic
+pip install cryptography
+alembic init migrations
 ```
 Swagger documentation 
 http://127.0.0.1:8000/docs
@@ -35,3 +36,11 @@ DELETE - remove a student / remove all students
 4. Click on 'stop', 'start' or 'restart' the service option.
 
 ## Migrations
+https://medium.com/pythonistas/managing-multiple-databases-migrations-with-alembic-10025a4b3ab3
+```shell
+alembic revision -m "create new column"
+alembic upgrade b9812ec5e377
+alembic downgrade -1
+alembic revision -m "Create student table"
+alembic upgrade a114666a1adf
+```

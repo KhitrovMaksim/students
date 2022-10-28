@@ -1,34 +1,20 @@
-from fastapi import FastAPI, status, Depends, HTTPException
+from fastapi import FastAPI, status, Depends, HTTPException, APIRouter
 from typing import Optional
 from database import engine, SessionLocal
 from sqlalchemy.orm import Session
 import models
 from pydantic import BaseModel, Field
 
-app = FastAPI()
-
-STUDENTS: list = [
-    {
-        "id": 1,
-        "firstName": "Maksim",
-        "lastName": "Khitrov",
-        "dateOfBirth": "24/06/1985",
-        "email": "khitrov.maksim@reqres.in",
-        "phone": "(111) 111-1111",
-        "favoriteSports": "Football, Tennis"
-    },
-    {
-        "id": 2,
-        "firstName": "Michael",
-        "lastName": "Lawson",
-        "dateOfBirth": "12/10/1970",
-        "email": "michael.lawson@reqres.in",
-        "phone": "(999) 999-9999",
-        'favoriteSports': "Golf"
-    }
-]
+app = FastAPI(
+    title='Students',
+    description='The task')
 
 models.Base.metadata.create_all(bind=engine)
+
+router = APIRouter(
+    prefix="/students",
+    tags=["Students"]
+)
 
 
 def get_db():
@@ -40,25 +26,37 @@ def get_db():
 
 
 class Student(BaseModel):
-    first_name: str = Field(description="First name [ minimum three characters ]")
-    last_name: str = Field(description="Last name [ minimum three characters ]")
-    date_of_birth: str = Field(description="Date of Birth [ format 01/01/2000 ]")
-    email: str = Field(description="Email [ format email@email.com ]")
-    phone: str = Field(description="Phone number [ format (999) 999-9999 ]")
-    favorite_sports: Optional[str] = Field(description="Favorite sports [ checkbox ]")
+    first_name: str = Field(title="First name",
+                            description="First name [ minimum three characters ]",
+                            max_length=100,
+                            min_length=3)
+    last_name: str = Field(title="Last name",
+                           description="Last name [ minimum three characters ]",
+                           max_length=100,
+                           min_length=3)
+    date_of_birth: str = Field(title="Date of Birth",
+                               description="Date of Birth [ format 01/01/2000 ]",
+                               max_length=10,
+                               min_length=10)
+    email: str = Field(title="Email",
+                       description="Email [ format email@email.com ]",
+                       max_length=100,
+                       min_length=6)
+    phone: str = Field(title="Phone number",
+                       description="Phone number [ format (999) 999-9999 ]",
+                       max_length=14,
+                       min_length=14)
+    favorite_sports: Optional[str] = Field(title="Favorite sports",
+                                           description="Favorite sports [ checkbox ]",
+                                           max_length=250)
 
 
-@app.get("/")
-async def check_connection():
-    return {"Connected!"}
-
-
-@app.get("/students")
+@router.get("/")
 async def get_all_students(db: Session = Depends(get_db)):
     return db.query(models.Students).all()
 
 
-@app.get("/students/{student_id}")
+@router.get("/{student_id}")
 async def get_student_by_id(student_id: int, db: Session = Depends(get_db)):
     student_model = db.query(models.Students).filter(models.Students.id == student_id).first()
     if student_model is not None:
@@ -66,7 +64,7 @@ async def get_student_by_id(student_id: int, db: Session = Depends(get_db)):
     raise HTTPException(status_code=404, detail="Student not found")
 
 
-@app.post("/students/", status_code=status.HTTP_201_CREATED)
+@router.post("/", status_code=status.HTTP_201_CREATED)
 async def add_student(student: Student, db: Session = Depends(get_db)):
     student_model = models.Students()
 
@@ -83,7 +81,7 @@ async def add_student(student: Student, db: Session = Depends(get_db)):
     return successful_response(201)
 
 
-@app.put("/students/{student_id}")
+@router.put("/{student_id}")
 async def update_student(student_id: int, student: Student, db: Session = Depends(get_db)):
     student_model = db.query(models.Students).filter(models.Students.id == student_id).first()
 
@@ -103,7 +101,7 @@ async def update_student(student_id: int, student: Student, db: Session = Depend
     return successful_response(200)
 
 
-@app.delete("/students/{student_id}")
+@router.delete("/{student_id}")
 async def delete_student(student_id: int, db: Session = Depends(get_db)):
     student_model = db.query(models.Students).filter(models.Students.id == student_id).first()
 
@@ -117,10 +115,11 @@ async def delete_student(student_id: int, db: Session = Depends(get_db)):
     return successful_response(201)
 
 
-@app.delete("/students/")
-async def delete_all_students():
-    STUDENTS.clear()
-    return "The student successfully deleted"
+@router.delete("/")
+async def delete_all_students(db: Session = Depends(get_db)):
+    db.query(models.Students).delete()
+    db.commit()
+    return "All students successfully deleted"
 
 
 def successful_response(status_code: int):
@@ -128,3 +127,6 @@ def successful_response(status_code: int):
         'status': status_code,
         'transaction': 'Successful'
     }
+
+
+app.include_router(router)
