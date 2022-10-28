@@ -12,10 +12,13 @@ fileConfig(config.config_file_name)
 target_metadata = Base.metadata
 
 db_name = config.config_ini_section
+
 TEST_SERVER_DB_PASSWORD = os.environ.get('TEST_SERVER_DB_PASSWORD')
+TEST_SERVER_HOST = os.environ.get('TEST_SERVER_HOST')
+
 config.set_main_option(
     "sqlalchemy.url",
-    f"mysql+pymysql://admin:{TEST_SERVER_DB_PASSWORD}@127.0.0.1:3306/students"
+    f"mysql+pymysql://teacher:{TEST_SERVER_DB_PASSWORD}@{TEST_SERVER_HOST}:3306/students"
 )
 
 

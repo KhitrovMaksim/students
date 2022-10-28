@@ -12,7 +12,7 @@ cd .\venv\Scripts\
 activate
 deactivate
 pip install fastapi[all]
-uvicorn students:app --reload
+uvicorn main:app --reload
 pip install sqlalchemy
 pip install pymysql
 pip install alembic
