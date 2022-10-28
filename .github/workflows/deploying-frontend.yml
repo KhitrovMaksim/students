@@ -39,7 +39,6 @@ jobs:
           script: |
             export CR_PAT=${{ secrets.GITHUB_TOKEN }}
             echo $CR_PAT | docker login ghcr.io -u khitrovmaksim --password-stdin
-            docker kill $(docker ps -q)
-            docker rm $(docker ps -a -q)
+            docker stop $(docker ps -a -q --filter ancestor=ghcr.io/khitrovmaksim/students_frontend:latest --format="{{.ID}}")
             docker rmi $(docker images -q)
             docker run -d --rm -p 80:80 ghcr.io/khitrovmaksim/students_frontend:latest
