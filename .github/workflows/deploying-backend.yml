@@ -31,17 +31,15 @@ jobs:
 
       - name: Run
         uses: appleboy/ssh-action@master
-        env:
-          TEST_SERVER_HOST: ${{ secrets.TEST_SERVER_HOST }}
-          TEST_SERVER_DB_PASSWORD: ${{ secrets.TEST_SERVER_DB_PASSWORD }}
         with:
           host: ${{ secrets.TEST_SERVER_HOST }}
           username: admin
           key: ${{ secrets.TEST_SERVER_PRIVATE_KEY }}
           port: 2202
-          envs: TEST_SERVER_HOST,TEST_SERVER_DB_PASSWORD
           script: |
             export CR_PAT=${{ secrets.GITHUB_TOKEN }}
+            export TEST_SERVER_HOST=${{ secrets.TEST_SERVER_HOST }}
+            export TEST_SERVER_DB_PASSWORD=${{ secrets.TEST_SERVER_DB_PASSWORD }}
             echo $CR_PAT | docker login ghcr.io -u khitrovmaksim --password-stdin
             docker stop $(docker ps -a -q --filter ancestor=ghcr.io/khitrovmaksim/students_backend:latest --format="{{.ID}}")
             docker rmi $(docker images -q)
