@@ -3,6 +3,10 @@ name: Deploying backend
 on:
   workflow_dispatch:
 
+env:
+  TEST_SERVER_HOST: ${{ secrets.TEST_SERVER_HOST }}
+  TEST_SERVER_DB_PASSWORD: ${{ secrets.TEST_SERVER_DB_PASSWORD }}
+
 jobs:
   build-and-push-docker-image:
     runs-on: ubuntu-latest
@@ -30,9 +34,6 @@ jobs:
           tags: ghcr.io/khitrovmaksim/students_backend:latest
 
       - name: Run
-        env:
-          TEST_SERVER_HOST: ${{ secrets.TEST_SERVER_HOST }}
-          TEST_SERVER_DB_PASSWORD: ${{ secrets.TEST_SERVER_DB_PASSWORD }}
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.TEST_SERVER_HOST }}
