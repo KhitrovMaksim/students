@@ -31,6 +31,9 @@ jobs:
 
       - name: Run
         uses: appleboy/ssh-action@master
+        env:
+          TEST_SERVER_HOST: ${{ secrets.TEST_SERVER_HOST }}
+          TEST_SERVER_DB_PASSWORD: ${{ secrets.TEST_SERVER_DB_PASSWORD }}
         with:
           host: ${{ secrets.TEST_SERVER_HOST }}
           username: admin
