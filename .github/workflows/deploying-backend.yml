@@ -4,8 +4,7 @@ on:
   workflow_dispatch:
 
 env:
-  TEST_SERVER_HOST: ${{ secrets.TEST_SERVER_HOST }}
-  TEST_SERVER_DB_PASSWORD: ${{ secrets.TEST_SERVER_DB_PASSWORD }}
+
 
 jobs:
   build-and-push-docker-image:
@@ -35,11 +34,15 @@ jobs:
 
       - name: Run
         uses: appleboy/ssh-action@master
+        env:
+          TEST_SERVER_HOST: ${{ secrets.TEST_SERVER_HOST }}
+          TEST_SERVER_DB_PASSWORD: ${{ secrets.TEST_SERVER_DB_PASSWORD }}
         with:
           host: ${{ secrets.TEST_SERVER_HOST }}
           username: admin
           key: ${{ secrets.TEST_SERVER_PRIVATE_KEY }}
           port: 2202
+          envs: TEST_SERVER_HOST,TEST_SERVER_DB_PASSWORD
           script: |
             export CR_PAT=${{ secrets.GITHUB_TOKEN }}
             echo $CR_PAT | docker login ghcr.io -u khitrovmaksim --password-stdin
