@@ -30,10 +30,10 @@ jobs:
           tags: ghcr.io/khitrovmaksim/students_backend:latest
 
       - name: Run
-        uses: appleboy/ssh-action@master
         env:
           TEST_SERVER_HOST: ${{ secrets.TEST_SERVER_HOST }}
           TEST_SERVER_DB_PASSWORD: ${{ secrets.TEST_SERVER_DB_PASSWORD }}
+        uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.TEST_SERVER_HOST }}
           username: admin
