@@ -3,9 +3,6 @@ name: Deploying backend
 on:
   workflow_dispatch:
 
-env:
-
-
 jobs:
   build-and-push-docker-image:
     runs-on: ubuntu-latest
