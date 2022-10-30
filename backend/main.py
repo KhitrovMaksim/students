@@ -1,5 +1,3 @@
-import os
-
 from fastapi import FastAPI, status, Depends, HTTPException, APIRouter
 from typing import Optional
 from database import engine, SessionLocal
@@ -7,8 +5,6 @@ from sqlalchemy.orm import Session
 import models
 from pydantic import BaseModel, Field
 
-print(os.environ.get('TEST_SERVER_DB_PASSWORD'))
-print(os.environ.get('TEST_SERVER_HOST'))
 
 app = FastAPI(
     title='Students',
