@@ -11,7 +11,7 @@ TEST_SERVER_IP = os.environ.get('TEST_SERVER_IP')
 
 app = FastAPI(
     title='Students',
-    description=f'Main page > http://{TEST_SERVER_IP}/students')
+    description=f'Back to <a href="http://{TEST_SERVER_IP}/students">main page.</a>')
 
 models.Base.metadata.create_all(bind=engine)
 
