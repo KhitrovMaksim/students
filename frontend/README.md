@@ -1,4 +1,5 @@
 ```shell
+npm run serve
 npm install --save vue-router vuex
 npm i --save @fortawesome/fontawesome-svg-core
 npm i --save @fortawesome/free-solid-svg-icons

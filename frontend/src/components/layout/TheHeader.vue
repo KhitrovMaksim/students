@@ -11,6 +11,7 @@
         <ul class="nav col-12 col-lg-auto mb-2 justify-content-center mb-md-0">
           <li><router-link to="/students" :class="classForStudentsLink">List of students</router-link></li>
           <li><router-link to="/about" :class="classForAboutLink">About</router-link></li>
+          <li><a href="/docs" class="nav-link px-2 text-white" >API</a></li>
         </ul>
 
         <div class="text-end">

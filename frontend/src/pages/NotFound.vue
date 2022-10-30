@@ -1,5 +1,7 @@
 <template>
-  <h2>Page not found</h2>
+  <main class="container mt-4">
+    <h4>Page not found</h4>
+  </main>
 </template>
 
 <script>
