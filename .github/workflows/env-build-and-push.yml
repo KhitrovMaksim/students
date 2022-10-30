@@ -1,4 +1,4 @@
-name: Deploying backend
+name: Env build and push
 
 on:
   workflow_dispatch:
