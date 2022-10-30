@@ -24,4 +24,4 @@ jobs:
             echo TEST_SERVER_HOST=$TEST_SERVER_HOST >> .env
             echo TEST_SERVER_DB_PASSWORD=$TEST_SERVER_DB_PASSWORD >> .env
             echo $CR_PAT | docker login ghcr.io -u khitrovmaksim --password-stdin
-            docker run --env-file ./.env --rm -p 8080:8080 ghcr.io/khitrovmaksim/students_backend:latest
+            docker run -d --env-file ./.env --rm -p 8080:8080 ghcr.io/khitrovmaksim/students_backend:latest
