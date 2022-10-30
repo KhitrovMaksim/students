@@ -27,4 +27,4 @@ jobs:
             echo $CR_PAT | docker login ghcr.io -u khitrovmaksim --password-stdin
             docker stop $(docker ps -a -q --filter ancestor=ghcr.io/khitrovmaksim/students_backend:latest --format="{{.ID}}")
             docker rmi $(docker images -q)
-            docker run --env-file ./.env --rm --add-host=host.docker.internal:host-gateway -p 8080:8080 ghcr.io/khitrovmaksim/students_backend:latest
+            docker run --env-file ./.env --rm --add-host=host.docker.internal:87.249.54.26 -p 8080:8080 ghcr.io/khitrovmaksim/students_backend:latest
