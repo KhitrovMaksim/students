@@ -1,3 +1,5 @@
+import os
+
 from fastapi import FastAPI, status, Depends, HTTPException, APIRouter
 from typing import Optional
 from database import engine, SessionLocal
@@ -5,10 +7,11 @@ from sqlalchemy.orm import Session
 import models
 from pydantic import BaseModel, Field
 
+TEST_SERVER_IP = os.environ.get('TEST_SERVER_IP')
 
 app = FastAPI(
     title='Students',
-    description='The task')
+    description=f'Main page > http://{TEST_SERVER_IP}/students')
 
 models.Base.metadata.create_all(bind=engine)
 
