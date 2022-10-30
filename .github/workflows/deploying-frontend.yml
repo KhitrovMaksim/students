@@ -2,6 +2,9 @@ name: Deploying frontend
 
 on:
   workflow_dispatch:
+  push:
+    paths:
+      - 'frontend/**'
 
 jobs:
   build-and-push-docker-image:
