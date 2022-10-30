@@ -1,8 +1,8 @@
 import os
 from sqlalchemy import create_engine, Column, Integer, String
-from sqlalchemy.orm import sessionmaker
+from sqlalchemy.orm import sessionmaker, Session
 from sqlalchemy.ext.declarative import declarative_base
-from fastapi import FastAPI
+from fastapi import FastAPI, Depends
 
 TEST_SERVER_DB_PASSWORD = os.environ.get('TEST_SERVER_DB_PASSWORD')
 TEST_SERVER_HOST = os.environ.get('TEST_SERVER_HOST')
@@ -32,7 +32,22 @@ class Students(Base):
 
 app = FastAPI()
 
+Base.metadata.create_all(bind=engine)
+
+
+def get_db():
+    try:
+        db = SessionLocal()
+        yield db
+    finally:
+        db.close()
+
 
 @app.get("/")
 async def get_all_students():
     return SQLALCHEMY_DATABASE_URL
+
+
+@app.get("/students")
+async def get_all_students(db: Session = Depends(get_db)):
+    return db.query(Students).all()
