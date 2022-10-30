@@ -7,7 +7,7 @@ from fastapi import FastAPI, Depends
 TEST_SERVER_DB_PASSWORD = os.environ.get('TEST_SERVER_DB_PASSWORD')
 TEST_SERVER_HOST = os.environ.get('TEST_SERVER_HOST')
 
-SQLALCHEMY_DATABASE_URL = f"mysql+pymysql://teacher:{TEST_SERVER_DB_PASSWORD}@0.0.0.0:3306/students"
+SQLALCHEMY_DATABASE_URL = f"mysql+pymysql://teacher:{TEST_SERVER_DB_PASSWORD}@127.0.0.1:3306/students"
 
 engine = create_engine(
     SQLALCHEMY_DATABASE_URL
