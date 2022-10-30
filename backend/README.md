@@ -43,4 +43,5 @@ alembic upgrade b9812ec5e377
 alembic downgrade -1
 alembic revision -m "Create student table"
 alembic upgrade a114666a1adf
+alembic upgrade head
 ```

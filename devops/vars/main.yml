@@ -6,6 +6,6 @@ mysql_databases:
 
 mysql_users:
   - name: teacher
-    host: "localhost"
+    host: "172.17.0.2"
     password: "{{ db_password }}"
     priv: "*.*:ALL"

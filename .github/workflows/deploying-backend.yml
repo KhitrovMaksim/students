@@ -4,7 +4,6 @@ on:
   workflow_dispatch:
 
 env:
-  TEST_SERVER_HOST: ${{ secrets.TEST_SERVER_HOST }}
   TEST_SERVER_DB_PASSWORD: ${{ secrets.TEST_SERVER_DB_PASSWORD }}
 
 jobs:
@@ -42,10 +41,11 @@ jobs:
           port: 2202
           envs: TEST_SERVER_HOST,TEST_SERVER_DB_PASSWORD
           script: |
+            rm .env
+            echo TEST_SERVER_HOST=host.docker.internal >> .env
+            echo TEST_SERVER_DB_PASSWORD=$TEST_SERVER_DB_PASSWORD >> .env
             export CR_PAT=${{ secrets.GITHUB_TOKEN }}
-            export TEST_SERVER_HOST=$TEST_SERVER_HOST
-            export TEST_SERVER_DB_PASSWORD=$TEST_SERVER_DB_PASSWORD
             echo $CR_PAT | docker login ghcr.io -u khitrovmaksim --password-stdin
             docker stop $(docker ps -a -q --filter ancestor=ghcr.io/khitrovmaksim/students_backend:latest --format="{{.ID}}")
             docker rmi $(docker images -q)
-            docker run -d -e TEST_SERVER_HOST -e TEST_SERVER_DB_PASSWORD --rm -p 8080:8080 ghcr.io/khitrovmaksim/students_backend:latest
+            docker run -d --env-file ./.env --add-host=host.docker.internal:host-gateway --rm -p 8080:8080 ghcr.io/khitrovmaksim/students_backend:latest
