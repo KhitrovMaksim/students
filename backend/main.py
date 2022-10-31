@@ -46,12 +46,12 @@ async def get_student_by_id(student_id: int, db: Session = Depends(get_db)):
 async def add_student(student: schemas.Student, db: Session = Depends(get_db)):
     student_model = models.Students()
 
-    student_model.first_name = student.first_name
-    student_model.last_name = student.last_name
+    student_model.first_name = student.first_name.capitalize()
+    student_model.last_name = student.last_name.capitalize()
     student_model.date_of_birth = student.date_of_birth
     student_model.email = student.email
     student_model.phone = student.phone
-    student_model.favorite_sports = student.favorite_sports
+    student_model.favorite_sports = ', '.join(student.favorite_sports)
 
     db.add(student_model)
     db.commit()
@@ -66,12 +66,12 @@ async def update_student(student_id: int, student: schemas.Student, db: Session 
     if student_model is None:
         raise HTTPException(status_code=404, detail="Student not found")
 
-    student_model.first_name = student.first_name
-    student_model.last_name = student.last_name
+    student_model.first_name = student.first_name.capitalize()
+    student_model.last_name = student.last_name.capitalize()
     student_model.date_of_birth = student.date_of_birth
     student_model.email = student.email
     student_model.phone = student.phone
-    student_model.favorite_sports = student.favorite_sports
+    student_model.favorite_sports = ', '.join(student.favorite_sports)
 
     db.add(student_model)
     db.commit()
