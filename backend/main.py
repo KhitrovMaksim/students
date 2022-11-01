@@ -11,20 +11,10 @@ app = FastAPI(
     title='Students',
     description=f'Back to <a href="http://{settings.TEST_SERVER_IP}/students">main page</a>.')
 
-origins = [
-    "http://localhost:8080",
-    "http://87.249.54.26:8080",
-    "http://87.249.54.26",
-    "http://localhost:8080",
-    "http://localhost:80",
-    "http://localhost",
-    f"http://{settings.TEST_SERVER_IP}",
-    f"http://{settings.TEST_SERVER_HOST}:8080"
-]
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=origins,
+    allow_origins=settings.origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
