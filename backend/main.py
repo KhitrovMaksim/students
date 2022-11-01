@@ -1,19 +1,36 @@
 import models
-import os
 import schemas
+import settings
 
 from fastapi import FastAPI, status, Depends, HTTPException, APIRouter
+from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
 
-from database import engine, SessionLocal
-
-TEST_SERVER_IP = os.environ.get('TEST_SERVER_IP')
 
 app = FastAPI(
     title='Students',
-    description=f'Back to <a href="http://{TEST_SERVER_IP}/students">main page</a>.')
+    description=f'Back to <a href="http://{settings.TEST_SERVER_IP}/students">main page</a>.')
 
-models.Base.metadata.create_all(bind=engine)
+origins = [
+    "http://localhost:8080",
+    "http://87.249.54.26:8080",
+    "http://87.249.54.26",
+    "http://localhost:8080",
+    "http://localhost:80",
+    "http://localhost",
+    f"http://{settings.TEST_SERVER_IP}",
+    f"http://{settings.TEST_SERVER_HOST}:8080"
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+settings.Base.metadata.create_all(bind=settings.engine)
 
 router = APIRouter(
     prefix="/students",
@@ -23,7 +40,7 @@ router = APIRouter(
 
 def get_db():
     try:
-        db = SessionLocal()
+        db = settings.SessionLocal()
         yield db
     finally:
         db.close()
