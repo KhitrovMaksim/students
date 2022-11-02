@@ -49,7 +49,6 @@ jobs:
           key: ${{ secrets.TEST_SERVER_PRIVATE_KEY }}
           port: 2202
           script: |
-            service mysql start
             rm .env
             echo TEST_SERVER_HOST=host.docker.internal >> .env
             echo TEST_SERVER_DB_PASSWORD=$TEST_SERVER_DB_PASSWORD >> .env

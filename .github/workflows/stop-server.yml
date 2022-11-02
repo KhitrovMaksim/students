@@ -15,7 +15,6 @@ jobs:
           key: ${{ secrets.TEST_SERVER_PRIVATE_KEY }}
           port: 2202
           script: |
-            service mysql stop
             rm .env
             export CR_PAT=${{ secrets.GITHUB_TOKEN }}
             echo $CR_PAT | docker login ghcr.io -u khitrovmaksim --password-stdin
