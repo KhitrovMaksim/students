@@ -3,16 +3,21 @@ name: MySQL dump
 on:
   workflow_dispatch:
 
+env:
+  TEST_SERVER_DB_PASSWORD: ${{ secrets.TEST_SERVER_DB_PASSWORD }}
+
 jobs:
   dump:
     runs-on: ubuntu-latest
     steps:
-      - name: Setup database
-        uses: mirromutth/mysql-action@v1.1
+      - name: Run
+        uses: appleboy/ssh-action@master
         with:
-          mysql version: '8.0'
-          mysql database: 'students'
-          mysql root password: ${{ secrets.TEST_SERVER_DB_PASSWORD }}
-          mysql user: 'admin'
-          mysql password: ${{ secrets.TEST_SERVER_DB_PASSWORD }}
-        run: mysqldump students > dump.sql
+          host: ${{ secrets.TEST_SERVER_HOST }}
+          username: admin
+          key: ${{ secrets.TEST_SERVER_PRIVATE_KEY }}
+          port: 2202
+          envs: TEST_SERVER_DB_PASSWORD
+          script: mysqldump -u admin -p$TEST_SERVER_DB_PASSWORD students > dump.sql
+
+
