@@ -62,5 +62,5 @@ jobs:
             echo TEST_SERVER_IP=$TEST_SERVER_HOST >> .env
             export CR_PAT=${{ secrets.GITHUB_TOKEN }}
             echo $CR_PAT | docker login ghcr.io -u khitrovmaksim --password-stdin
-            docker run --net studentsnet --ip 172.20.0.2 --env-file ./.env --add-host=host.docker.internal:host-gateway --rm -p 8080:8080 ghcr.io/khitrovmaksim/students_backend:latest
+            docker run --net studentsnet --ip 172.20.0.2 --env-file ./.env --add-host=host.docker.internal:host-gateway -d --rm -p 8080:8080 ghcr.io/khitrovmaksim/students_backend:latest
             docker run -d --rm -p 80:80 ghcr.io/khitrovmaksim/students_frontend:latest
