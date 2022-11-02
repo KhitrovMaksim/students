@@ -6,9 +6,9 @@
     <div class="mb-3 row">
       <label for="firstName" class="col-sm-2 col-form-label">First name</label>
       <div class="col-sm-10">
-        <input type="text" :class="firstName.classForInput" id="firstName" v-model.trim="firstName.value"/>
+        <input type="text" :class="first_name.classForInput" id="firstName" v-model.trim="first_name.value"/>
       </div>
-      <div :class="firstName.classForFeedback">
+      <div :class="first_name.classForFeedback">
         Valid first name is required.
       </div>
     </div>
@@ -16,9 +16,9 @@
     <div class="mb-3 row">
       <label for="lastName" class="col-sm-2 col-form-label">Last name</label>
       <div class="col-sm-10">
-        <input type="text" :class="lastName.classForInput" id="lastName" v-model.trim="lastName.value" />
+        <input type="text" :class="last_name.classForInput" id="lastName" v-model.trim="last_name.value" />
       </div>
-      <div :class="lastName.classForFeedback">
+      <div :class="last_name.classForFeedback">
         Valid last name is required.
       </div>
     </div>
@@ -47,13 +47,13 @@
       <label for="birth" class="col-sm-2 col-form-label">Date of Birth</label>
       <div class="col-sm-10">
         <Datepicker
-            v-model="dateOfBirth.value"
+            v-model="date_of_birth.value"
             inputFormat="dd/MM/yyyy"
-            :class="dateOfBirth.classForInput"
+            :class="date_of_birth.classForInput"
             @update:modelValue="formatDate"
         ></Datepicker>
       </div>
-      <div :class="dateOfBirth.classForFeedback">
+      <div :class="date_of_birth.classForFeedback">
         Date of birth required. An example: 01/01/2000
       </div>
     </div>
@@ -100,25 +100,27 @@ import Datepicker from "vue3-datepicker";
 
 export default {
   name: "StudentAdd",
+  emits: ['save-data'],
   components: {
     Datepicker
   },
   props: ['student'],
   data() {
     return {
-      firstName: {
+      id: null,
+      first_name: {
         value: '',
         isValid: true,
         classForInput: 'form-control',
         classForFeedback: 'valid'
       },
-      lastName: {
+      last_name: {
         value: '',
         isValid: true,
         classForInput: 'form-control',
         classForFeedback: 'valid'
       },
-      dateOfBirth: {
+      date_of_birth: {
         value: new Date(),
         formattedDate: '',
         isValid: true,
@@ -161,39 +163,39 @@ export default {
     formatDate(date) {
       const getRid = date.getTimezoneOffset() * 60 * 1000
       const formattedDate = new Date(date - getRid).toISOString().split('T')[0].split('-')
-      this.dateOfBirth.formattedDate = formattedDate[2] + '/' + formattedDate[1] + '/' + formattedDate[0]
+      this.date_of_birth.formattedDate = formattedDate[2] + '/' + formattedDate[1] + '/' + formattedDate[0]
     },
     validateForm() {
       this.formIsValid = true
 
-      if (this.firstName.value !== '' && this.firstName.value.length > 2) {
-        this.firstName.classForInput = 'form-control is-valid'
-        this.firstName.classForFeedback = 'valid'
+      if (this.first_name.value !== '' && this.first_name.value.length > 2) {
+        this.first_name.classForInput = 'form-control is-valid'
+        this.first_name.classForFeedback = 'valid'
       } else {
-        this.firstName.isValid = false
+        this.first_name.isValid = false
         this.formIsValid = false
-        this.firstName.classForInput = 'form-control is-invalid'
-        this.firstName.classForFeedback = 'invalid'
+        this.first_name.classForInput = 'form-control is-invalid'
+        this.first_name.classForFeedback = 'invalid'
       }
 
-      if (this.lastName.value !== '' && this.lastName.value.length > 2) {
-        this.lastName.classForInput = 'form-control is-valid'
-        this.lastName.classForFeedback = 'valid'
+      if (this.last_name.value !== '' && this.last_name.value.length > 2) {
+        this.last_name.classForInput = 'form-control is-valid'
+        this.last_name.classForFeedback = 'valid'
       } else {
-        this.lastName.isValid = 'invalid'
+        this.last_name.isValid = 'invalid'
         this.formIsValid = false
-        this.lastName.classForInput = 'form-control is-invalid'
-        this.lastName.classForFeedback = 'invalid'
+        this.last_name.classForInput = 'form-control is-invalid'
+        this.last_name.classForFeedback = 'invalid'
       }
 
-      if (this.validateDate(this.dateOfBirth.formattedDate)) {
-        this.dateOfBirth.classForInput = 'form-control is-valid'
-        this.dateOfBirth.classForFeedback = 'valid'
+      if (this.validateDate(this.date_of_birth.formattedDate)) {
+        this.date_of_birth.classForInput = 'form-control is-valid'
+        this.date_of_birth.classForFeedback = 'valid'
       } else {
-        this.dateOfBirth.isValid = 'invalid'
+        this.date_of_birth.isValid = 'invalid'
         this.formIsValid = false
-        this.dateOfBirth.classForInput = 'form-control is-invalid'
-        this.dateOfBirth.classForFeedback = 'invalid'
+        this.date_of_birth.classForInput = 'form-control is-invalid'
+        this.date_of_birth.classForFeedback = 'invalid'
       }
 
       if (this.validateEmail(this.email.value)) {
@@ -224,28 +226,34 @@ export default {
       }
 
       const formData = {
-        firstName: this.firstName.value,
-        lastName: this.lastName.value,
-        dateOfBirth: this.dateOfBirth.formattedDate,
+        first_name: this.first_name.value,
+        last_name: this.last_name.value,
+        date_of_birth: this.date_of_birth.formattedDate,
         email: this.email.value.toLowerCase(),
         phone: this.phone.value,
-        favoriteSports: this.checkedSports
+        favorite_sports: Object.values(this.checkedSports)
       }
 
-      this.$emit('save-data', formData);
+      const id = this.id
+
+      this.$emit('save-data', { formData, id });
     }
   },
   created() {
     if (this.student) {
-      const dateParts = this.student.dateOfBirth.split("/")
-      this.dateOfBirth.value = new Date(+dateParts[2], dateParts[1] - 1, +dateParts[0])
-      this.dateOfBirth.formattedDate = this.student.dateOfBirth
-      this.firstName.value = this.student.firstName
-      this.lastName.value = this.student.lastName
+      const dateParts = this.student.date_of_birth.split("/")
+      this.id = this.student.id
+      this.date_of_birth.value = new Date(+dateParts[2], dateParts[1] - 1, +dateParts[0])
+      this.date_of_birth.formattedDate = this.student.date_of_birth
+      this.first_name.value = this.student.first_name
+      this.last_name.value = this.student.last_name
       this.email.value = this.student.email
       this.phone.value = this.student.phone
-      this.checkedSports = this.student.favoriteSports
+      if (this.student.favorite_sports) {
+        this.checkedSports = this.student.favorite_sports.split(", ")
+      }
     }
+
   }
 }
 </script>

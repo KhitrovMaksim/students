@@ -10,7 +10,13 @@
       </div>
     </nav>
 
-    <div class="table-responsive-lg">
+    <div v-if="isLoading" class="text-center">
+      <div class="spinner-border" role="status">
+        <span class="sr-only">Loading...</span>
+      </div>
+    </div>
+
+    <div v-else class="table-responsive-lg">
       <table class="table table-sm table-hover">
 
         <thead>
@@ -27,25 +33,25 @@
         </thead>
 
         <tbody v-if="hasStudents">
-        <tr v-for="student in getStudents" :key="student.id">
-          <td>{{ student.id }}</td>
-          <td>{{ student.firstName }}</td>
-          <td>{{ student.lastName }}</td>
-          <td>{{ student.dateOfBirth }}</td>
+        <tr v-for="(student, index) in getStudents" :key="student.id">
+          <td>{{ index }}</td>
+          <td>{{ student.first_name }}</td>
+          <td>{{ student.last_name }}</td>
+          <td>{{ student.date_of_birth }}</td>
           <td>{{ student.email }}</td>
           <td>{{ student.phone }}</td>
 
-          <td v-if="student.favoriteSports.length < 2">
-            {{ student.favoriteSports[0] }}
+          <td v-if="student.favorite_sports.split(', ').length < 2">
+            {{ student.favorite_sports.split(', ')[0] }}
           </td>
 
           <td v-else>
-            {{ student.favoriteSports[0] }}...
+            {{ student.favorite_sports.split(', ')[0] }}...
             <Popper>
               <font-awesome-icon icon="fa-solid fa-chevron-down" />
               <template #content>
                 <ul class="list-group">
-                  <li v-for="sports in student.favoriteSports" :key="sports" class="list-group-item">
+                  <li v-for="sports in student.favorite_sports.split(', ')" :key="sports" class="list-group-item">
                     {{ sports }}
                   </li>
                 </ul>
@@ -54,10 +60,10 @@
           </td>
 
           <td>
-            <router-link :to="`/students/${student.id}`" class="btn btn-outline-info">
+            <router-link :to="`/students/${index}`" class="btn btn-outline-info">
               <font-awesome-icon icon="fa-solid fa-magnifying-glass" />
             </router-link>
-            <router-link :to="`/students/${student.id}/edit`" class="btn btn-outline-warning mx-2">
+            <router-link :to="`/students/${index}/edit`" class="btn btn-outline-warning mx-2">
               <font-awesome-icon icon="fa-solid fa-pen-to-square" />
             </router-link>
             <button class="btn btn-outline-danger" @click="remove(student.id)">
@@ -85,6 +91,11 @@ export default{
   components: {
     Popper
   },
+  data() {
+    return {
+      isLoading: false
+    }
+  },
   computed: {
     getStudents() {
       return this.$store.getters['students/students']
@@ -93,9 +104,17 @@ export default{
       return this.$store.getters['students/hasStudents']
     }
   },
+  created() {
+    this.getStudentsFromDB()
+  },
   methods: {
     remove(studentId) {
       this.$store.dispatch('students/removeStudent', { id: studentId })
+    },
+    async getStudentsFromDB() {
+      this.isLoading = true
+      await this.$store.dispatch('students/getStudents')
+      this.isLoading = false
     }
   }
 }

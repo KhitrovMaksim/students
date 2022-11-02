@@ -55,7 +55,7 @@
           </p>
         </div>
         <div class="col-md-4">
-          <h2>Conclusion:</h2>
+          <h2>Solution: </h2>
           <p>
             To solve this problem, I decided to use frameworks that are familiar to me and have recently been gaining
             popularity, such as Vue 3 and FastAPI. I will also use a real server to implement this project.

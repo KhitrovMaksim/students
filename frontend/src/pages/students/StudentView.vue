@@ -3,35 +3,28 @@
     <div class="card">
       <div class="card-body text-center">
         <h1 class="card-title"><font-awesome-icon icon="fa-solid fa-user-tie" /></h1>
-        <p class="card-text">The student with id: {{ selectedStudent.id }}</p>
+        <p class="card-text">The student with id: {{ this.$route.params.id }}</p>
       </div>
       <div class="card-body">
         <div class="row">
           <div class="col-sm-3">
             <h6 class="mb-0">First name:</h6>
           </div>
-          <div class="col-sm-9 text-secondary"> {{ selectedStudent.firstName }}</div>
+          <div class="col-sm-9 text-secondary"> {{ selectedStudent.first_name }}</div>
         </div>
         <hr>
         <div class="row">
           <div class="col-sm-3">
             <h6 class="mb-0">Last name:</h6>
           </div>
-          <div class="col-sm-9 text-secondary"> {{ selectedStudent.lastName }}</div>
-        </div>
-        <hr>
-        <div class="row">
-          <div class="col-sm-3">
-            <h6 class="mb-0">Last name:</h6>
-          </div>
-          <div class="col-sm-9 text-secondary"> {{ selectedStudent.lastName }}</div>
+          <div class="col-sm-9 text-secondary"> {{ selectedStudent.last_name }}</div>
         </div>
         <hr>
         <div class="row">
           <div class="col-sm-3">
             <h6 class="mb-0">Date of birth:</h6>
           </div>
-          <div class="col-sm-9 text-secondary"> {{ selectedStudent.dateOfBirth}}</div>
+          <div class="col-sm-9 text-secondary"> {{ selectedStudent.date_of_birth}}</div>
         </div>
         <hr>
         <div class="row">
@@ -53,7 +46,7 @@
             <h6 class="mb-0">Favorite sports: </h6>
           </div>
           <div class="col-sm-9 text-secondary">
-              <span v-for="sport in selectedStudent.favoriteSports" :key="sport" >
+              <span v-for="sport in selectedStudent.favorite_sports.split(', ')" :key="sport" >
                 {{ sport }}<br>
               </span>
           </div>
@@ -61,7 +54,7 @@
         <hr>
         <div class="card-body">
             <router-link to="/students" class="btn btn-outline-primary">Back to list</router-link>
-            <router-link :to="`/students/${selectedStudent.id}/edit`" class="btn btn-outline-warning mx-2">Edit</router-link>
+            <router-link :to="`/students/${this.$route.params.id}/edit`" class="btn btn-outline-warning mx-2">Edit</router-link>
             <button class="btn btn-outline-danger" @click="remove(selectedStudent.id)">Delete</button>
         </div>
       </div>
@@ -80,7 +73,8 @@ export default {
   },
   methods: {
     remove(studentId) {
-      this.$store.dispatch('students/removeStudent', {Id: studentId})
+      console.log(studentId)
+      this.$store.dispatch('students/removeStudent', { id: studentId })
       this.$router.push('/students')
     }
   }

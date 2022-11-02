@@ -17,8 +17,8 @@ export default {
     StudentForm
   },
   methods: {
-    saveData(formData) {
-      this.$store.dispatch('students/addNewStudent', formData)
+    saveData(data) {
+      this.$store.dispatch('students/addNewStudent', data.formData)
       this.$router.push('/students')
     }
   }

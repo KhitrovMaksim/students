@@ -17,10 +17,10 @@ export default {
     StudentForm
   },
   methods: {
-    saveData(formData) {
-      this.$store.dispatch('students/editTheStudent', {
-        studentId: this.$route.params.id,
-        updatedStudent: formData
+    saveData(data) {
+      this.$store.dispatch('students/updateStudent', {
+        studentId: data.id,
+        updatedStudent: data.formData
       })
       this.$router.push('/students')
     }

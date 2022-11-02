@@ -13,7 +13,6 @@ import { faLinkedin, faGithub } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 
 
-
 library.add(
     faGraduationCap,
     faSquareCaretDown,
