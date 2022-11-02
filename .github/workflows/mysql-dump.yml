@@ -7,7 +7,10 @@ jobs:
   dump:
     runs-on: ubuntu-latest
     steps:
-      - name: Setup test database
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup database
         uses: mirromutth/mysql-action@v1.1
         with:
           mysql version: '8.0'
@@ -15,4 +18,6 @@ jobs:
           mysql root password: ${{ secrets.TEST_SERVER_DB_PASSWORD }}
           mysql user: 'teacher'
           mysql password: ${{ secrets.TEST_SERVER_DB_PASSWORD }}
+
+      - name: Make dump
         run: mysqldump students > dump.sql
