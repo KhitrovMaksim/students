@@ -3,7 +3,7 @@ import axios from "axios";
 function getLink() {
     if (window.location.host === '127.0.0.1:8080' || window.location.host === 'localhost:8080')
         return "http://localhost:8000/students/"
-    return window.location.protocol + "//" + window.location.host + ":8080/students"
+    return window.location.protocol + "//" + window.location.host + ":8080/students/"
 }
 
 export default {
