@@ -1,11 +1,7 @@
-name: Start server
+name: MySQL dump
 
 on:
   workflow_dispatch:
-
-env:
-  TEST_SERVER_DB_PASSWORD: ${{ secrets.TEST_SERVER_DB_PASSWORD }}
-  TEST_SERVER_HOST: ${{ secrets.TEST_SERVER_HOST }}
 
 jobs:
   build-and-push-docker-images:
@@ -53,14 +49,13 @@ jobs:
           username: admin
           key: ${{ secrets.TEST_SERVER_PRIVATE_KEY }}
           port: 2202
-          envs: TEST_SERVER_HOST,TEST_SERVER_DB_PASSWORD
           script: |
-            docker network create --subnet=172.20.0.0/16 studentsnet
+            docker network create --subnet=172.17.0.0/16 studentsnet
             rm .env
             echo TEST_SERVER_HOST=host.docker.internal >> .env
             echo TEST_SERVER_DB_PASSWORD=$TEST_SERVER_DB_PASSWORD >> .env
             echo TEST_SERVER_IP=$TEST_SERVER_HOST >> .env
             export CR_PAT=${{ secrets.GITHUB_TOKEN }}
             echo $CR_PAT | docker login ghcr.io -u khitrovmaksim --password-stdin
-            docker run --net studentsnet --ip 172.20.0.2 --env-file ./.env --add-host=host.docker.internal:host-gateway --rm -p 8080:8080 ghcr.io/khitrovmaksim/students_backend:latest
+            docker run --net studentsnet --ip 172.17.0.2 -d --env-file ./.env --add-host=host.docker.internal:host-gateway --rm -p 8080:8080 ghcr.io/khitrovmaksim/students_backend:latest
             docker run -d --rm -p 80:80 ghcr.io/khitrovmaksim/students_frontend:latest
