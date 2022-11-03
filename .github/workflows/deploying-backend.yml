@@ -45,6 +45,7 @@ jobs:
           port: 2202
           envs: TEST_SERVER_HOST,TEST_SERVER_DB_PASSWORD
           script: |
+            docker network create --subnet=172.20.0.0/16 studentsnet
             rm .env
             echo TEST_SERVER_HOST=host.docker.internal >> .env
             echo TEST_SERVER_DB_PASSWORD=$TEST_SERVER_DB_PASSWORD >> .env
@@ -53,4 +54,4 @@ jobs:
             echo $CR_PAT | docker login ghcr.io -u khitrovmaksim --password-stdin
             docker stop $(docker ps -a -q --filter ancestor=ghcr.io/khitrovmaksim/students_backend:latest --format="{{.ID}}")
             docker rmi $(docker images -q)
-            docker run -d --env-file ./.env --add-host=host.docker.internal:host-gateway --rm -p 8080:8080 ghcr.io/khitrovmaksim/students_backend:latest
+            docker run --net studentsnet --ip 172.20.0.2 --env-file ./.env --add-host=host.docker.internal:host-gateway -d --rm -p 8080:8080 ghcr.io/khitrovmaksim/students_backend:latest
