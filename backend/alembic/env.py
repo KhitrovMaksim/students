@@ -1,4 +1,4 @@
-from backend import settings
+from settings import Base, TEST_SERVER_HOST, TEST_SERVER_DB_PASSWORD
 from logging.config import fileConfig
 from sqlalchemy import engine_from_config
 from sqlalchemy import pool
@@ -7,13 +7,13 @@ from alembic import context
 
 config = context.config
 fileConfig(config.config_file_name)
-target_metadata = settings.Base.metadata
+target_metadata = Base.metadata
 
 db_name = config.config_ini_section
 
 config.set_main_option(
     "sqlalchemy.url",
-    f"mysql+pymysql://teacher:{settings.TEST_SERVER_DB_PASSWORD}@{settings.TEST_SERVER_HOST}:3306/students"
+    f"mysql+pymysql://teacher:{TEST_SERVER_DB_PASSWORD}@{TEST_SERVER_HOST}:3306/students"
 )
 
 
