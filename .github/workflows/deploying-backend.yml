@@ -50,8 +50,6 @@ jobs:
             echo TEST_SERVER_HOST=host.docker.internal >> .env
             echo TEST_SERVER_DB_PASSWORD=$TEST_SERVER_DB_PASSWORD >> .env
             echo TEST_SERVER_IP=$TEST_SERVER_HOST >> .env
-            export CR_PAT=${{ secrets.GITHUB_TOKEN }}
-            echo $CR_PAT | docker login ghcr.io -u khitrovmaksim --password-stdin
             docker stop $(docker ps -a -q --filter ancestor=ghcr.io/khitrovmaksim/students_backend:latest --format="{{.ID}}")
             docker rmi $(docker images -q)
             docker run --net studentsnet --ip 172.20.0.2 --env-file ./.env --add-host=host.docker.internal:host-gateway -d --rm -p 8080:8080 ghcr.io/khitrovmaksim/students_backend:latest
