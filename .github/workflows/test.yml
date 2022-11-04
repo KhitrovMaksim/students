@@ -7,12 +7,6 @@ jobs:
   build-and-push-docker-image:
     runs-on: ubuntu-latest
     steps:
-      - name: set lower case owner name
-        run: |
-            echo "OWNER_LC=${OWNER,,}" >>${GITHUB_ENV}
-            echo "REPO=${GITHUB_REPOSITORY,,}" >>${GITHUB_ENV}
-        env:
-            OWNER: '${{ github.repository_owner }}'
       - name: Run
         uses: appleboy/ssh-action@master
         with:
@@ -22,6 +16,8 @@ jobs:
           port: 2202
           script: |
             rm new.txt
+            echo "OWNER_LC=${OWNER,,}" >>${GITHUB_ENV}
+            echo "REPO=${GITHUB_REPOSITORY,,}" >>${GITHUB_ENV}
             echo ${{ github.repository_owner }} >> new.txt
             echo ${OWNER_LC} >> new.txt
             echo ${REPO} >> new.txt
