@@ -18,9 +18,11 @@ jobs:
           username: admin
           key: ${{ secrets.TEST_SERVER_PRIVATE_KEY }}
           port: 2202
+          env: REPO, IMAGE_REPOSITORY
           script: |
             rm new.txt
             echo ${{ github.repository_owner }} >> new.txt
-            echo ${OWNER_LC} >> new.txt
+            echo ${{ env.OWNER_LC }} >> new.txt
+            echo ${{ env.REPO }} >> new.txt
             echo ${REPO} >> new.txt
             echo ${IMAGE_REPOSITORY} >> new.txt
