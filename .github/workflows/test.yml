@@ -1,0 +1,27 @@
+name: Deploying backend
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build-and-push-docker-image:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.TEST_SERVER_HOST }}
+          username: admin
+          key: ${{ secrets.TEST_SERVER_PRIVATE_KEY }}
+          port: 2202
+          script: |
+            echo $GITHUB_REPOSITORY_OWNER >> new.txt
+            echo $GITHUB_REPOSITORY_OWNER >> new.txt
+            echo ${{ github.repository }} >> new.txt
+            echo ${{ env.REGISTRY }} >> new.txt
+            echo ${{ github.actor }} >> new.txt
+            echo ${{ github.actor,, }} >> new.txt
+            echo ${{ github.repository_owner }} >> new.txt
+            echo ${{ env.GITHUB_REPOSITORY_OWNER }} >> new.txt
+            echo ${{ env.GITHUB_REPOSITORY_OWNER,, }} >> new.txt
+            echo ${{ github.ref }} >> new.txt
