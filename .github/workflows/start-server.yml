@@ -50,6 +50,9 @@ jobs:
     needs: build-and-push-docker-images
     runs-on: ubuntu-latest
     steps:
+      - name: Downcase repository owner
+        run: |
+          echo "OWNER=${GITHUB_REPOSITORY_OWNER,,}" >>${GITHUB_ENV}
       - name: Run
         uses: appleboy/ssh-action@master
         with:
