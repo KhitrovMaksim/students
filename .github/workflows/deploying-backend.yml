@@ -55,5 +55,6 @@ jobs:
             echo TEST_SERVER_IP=$TEST_SERVER_HOST >> .env
             docker stop $(docker ps -a -q --filter ancestor=ghcr.io/${{ env.OWNER }}/students_backend:latest --format="{{.ID}}")
             docker rmi $(docker images -q)
-            docker pull ghcr.io/${{ env.OWNER }}/students_backend:latest
+            export CR_PAT=${{ secrets.GITHUB_TOKEN }}
+            echo $CR_PAT | docker login ghcr.io -u ${{ env.OWNER }} --password-stdin
             docker run --net studentsnet --ip 172.20.0.2 --env-file ./.env --add-host=host.docker.internal:host-gateway -d --rm -p 8080:8080 ghcr.io/${{ env.OWNER }}/students_backend:latest
