@@ -11,6 +11,10 @@ jobs:
   build-and-push-docker-images:
     runs-on: ubuntu-latest
     steps:
+      - name: Downcase repository owner
+        run: |
+          echo "OWNER=${GITHUB_REPOSITORY_OWNER,,}" >>${GITHUB_ENV}
+
       - name: Checkout
         uses: actions/checkout@v3
 
@@ -31,7 +35,7 @@ jobs:
           file: ./Dockerfile
           builder: ${{ steps.buildx.outputs.name }}
           push: true
-          tags: ghcr.io/khitrovmaksim/students_frontend:latest
+          tags: ghcr.io/${{ env.OWNER }}/students_frontend:latest
 
       - name: Build and push backend
         uses: docker/build-push-action@v3
@@ -40,7 +44,7 @@ jobs:
           file: ./Dockerfile
           builder: ${{ steps.buildx.outputs.name }}
           push: true
-          tags: ghcr.io/khitrovmaksim/students_backend:latest
+          tags: ghcr.io/${{ env.OWNER }}/students_backend:latest
 
   run-docker-images:
     needs: build-and-push-docker-images
@@ -61,6 +65,6 @@ jobs:
             echo TEST_SERVER_DB_PASSWORD=$TEST_SERVER_DB_PASSWORD >> .env
             echo TEST_SERVER_IP=$TEST_SERVER_HOST >> .env
             export CR_PAT=${{ secrets.GITHUB_TOKEN }}
-            echo $CR_PAT | docker login ghcr.io -u khitrovmaksim --password-stdin
-            docker run --net studentsnet --ip 172.20.0.2 --env-file ./.env --add-host=host.docker.internal:host-gateway -d --rm -p 8080:8080 ghcr.io/khitrovmaksim/students_backend:latest
-            docker run -d --rm -p 80:80 ghcr.io/khitrovmaksim/students_frontend:latest
+            echo $CR_PAT | docker login ghcr.io -u ${{ env.OWNER }} --password-stdin
+            docker run --net studentsnet --ip 172.20.0.2 --env-file ./.env --add-host=host.docker.internal:host-gateway -d --rm -p 8080:8080 ghcr.io/${{ env.OWNER }}/students_backend:latest
+            docker run -d --rm -p 80:80 ghcr.io/${{ env.OWNER }}/students_frontend:latest

@@ -10,6 +10,9 @@ jobs:
   build-and-push-docker-image:
     runs-on: ubuntu-latest
     steps:
+      - name: Downcase repository owner
+        run: |
+          echo "OWNER=${GITHUB_REPOSITORY_OWNER,,}" >>${GITHUB_ENV}
       - name: Checkout
         uses: actions/checkout@v3
 
@@ -30,7 +33,7 @@ jobs:
           file: ./Dockerfile
           builder: ${{ steps.buildx.outputs.name }}
           push: true
-          tags: ghcr.io/khitrovmaksim/students_frontend:latest
+          tags: ghcr.io/${{ env.OWNER }}/students_frontend:latest
 
       - name: Run
         uses: appleboy/ssh-action@master
@@ -41,7 +44,7 @@ jobs:
           port: 2202
           script: |
             export CR_PAT=${{ secrets.GITHUB_TOKEN }}
-            echo $CR_PAT | docker login ghcr.io -u khitrovmaksim --password-stdin
-            docker stop $(docker ps -a -q --filter ancestor=ghcr.io/khitrovmaksim/students_frontend:latest --format="{{.ID}}")
+            echo $CR_PAT | docker login ghcr.io -u ${{ env.OWNER }} --password-stdin
+            docker stop $(docker ps -a -q --filter ancestor=ghcr.io/${{ env.OWNER }}/students_frontend:latest --format="{{.ID}}")
             docker rmi $(docker images -q)
-            docker run -d --rm -p 80:80 ghcr.io/khitrovmaksim/students_frontend:latest
+            docker run -d --rm -p 80:80 ghcr.io/${{ env.OWNER }}/students_frontend:latest
