@@ -20,8 +20,8 @@ jobs:
             echo ${{ github.repository }} >> new.txt
             echo ${{ env.REGISTRY }} >> new.txt
             echo ${{ github.actor }} >> new.txt
-            echo ${{ github.actor,, }} >> new.txt
+            echo ${{ github.actor }} >> new.txt
             echo ${{ github.repository_owner }} >> new.txt
             echo ${{ env.GITHUB_REPOSITORY_OWNER }} >> new.txt
-            echo ${{ env.GITHUB_REPOSITORY_OWNER,, }} >> new.txt
+            echo ${{ env.GITHUB_REPOSITORY_OWNER }} >> new.txt
             echo ${{ github.ref }} >> new.txt
