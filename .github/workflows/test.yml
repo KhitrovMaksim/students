@@ -17,7 +17,6 @@ jobs:
           username: admin
           key: ${{ secrets.TEST_SERVER_PRIVATE_KEY }}
           port: 2202
-          env: REPO, IMAGE_REPOSITORY
           script: |
             rm new.txt
             echo ${{ env.REPO }} >> new.txt
