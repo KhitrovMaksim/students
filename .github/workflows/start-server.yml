@@ -60,7 +60,7 @@ jobs:
           envs: TEST_SERVER_HOST,TEST_SERVER_DB_PASSWORD
           script: |
             docker network create --subnet=172.20.0.0/16 studentsnet
-            rm .env
+            rm -f .env
             echo TEST_SERVER_HOST=host.docker.internal >> .env
             echo TEST_SERVER_DB_PASSWORD=$TEST_SERVER_DB_PASSWORD >> .env
             echo TEST_SERVER_IP=$TEST_SERVER_HOST >> .env

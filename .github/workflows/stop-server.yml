@@ -18,9 +18,7 @@ jobs:
           key: ${{ secrets.TEST_SERVER_PRIVATE_KEY }}
           port: 2202
           script: |
-            rm .env
-            export CR_PAT=${{ secrets.GITHUB_TOKEN }}
-            echo $CR_PAT | docker login ghcr.io -u ${{ env.OWNER }} --password-stdin
+            rm -f .env
             docker stop $(docker ps -a -q --filter ancestor=ghcr.io/${{ env.OWNER }}/students_backend:latest --format="{{.ID}}")
             docker stop $(docker ps -a -q --filter ancestor=ghcr.io/${{ env.OWNER }}/students_frontend:latest --format="{{.ID}}")
             docker rmi $(docker images -q)
