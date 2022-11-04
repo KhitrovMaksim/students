@@ -10,7 +10,7 @@ jobs:
       - name: downcase REPO
         run: |
           echo "REPO=${GITHUB_REPOSITORY,,}" >>${GITHUB_ENV}
-          echo IMAGE_REPOSITORY=$(echo ${{ github.repository }} | tr '[:upper:]' '[:lower:]') >> $GITHUB_ENV
+          echo IMAGE_REPOSITORY=$(echo ${{ github.repository_owner }} | tr '[:upper:]' '[:lower:]') >> $GITHUB_ENV
       - name: Run
         uses: appleboy/ssh-action@master
         with:
@@ -21,8 +21,6 @@ jobs:
           env: REPO, IMAGE_REPOSITORY
           script: |
             rm new.txt
-            echo ${{ github.repository_owner }} >> new.txt
             echo ${{ env.OWNER_LC }} >> new.txt
             echo ${{ env.REPO }} >> new.txt
-            echo ${REPO} >> new.txt
-            echo ${IMAGE_REPOSITORY} >> new.txt
+
