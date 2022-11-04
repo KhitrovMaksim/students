@@ -7,6 +7,10 @@ jobs:
   build-and-push-docker-image:
     runs-on: ubuntu-latest
     steps:
+      - name: downcase REPO
+        run: |
+          echo "REPO=${GITHUB_REPOSITORY,,}" >>${GITHUB_ENV}
+          echo IMAGE_REPOSITORY=$(echo ${{ github.repository }} | tr '[:upper:]' '[:lower:]') >> $GITHUB_ENV
       - name: Run
         uses: appleboy/ssh-action@master
         with:
@@ -16,8 +20,7 @@ jobs:
           port: 2202
           script: |
             rm new.txt
-            echo "OWNER_LC=${OWNER,,}" >>${GITHUB_ENV}
-            echo "REPO=${GITHUB_REPOSITORY,,}" >>${GITHUB_ENV}
             echo ${{ github.repository_owner }} >> new.txt
             echo ${OWNER_LC} >> new.txt
             echo ${REPO} >> new.txt
+            echo ${IMAGE_REPOSITORY} >> new.txt
