@@ -22,4 +22,4 @@ jobs:
           script: |
             rm new.txt
             echo ${{ github.repository_owner }} >> new.txt
-            echo $OWNER_LC= >> new.txt
+            echo ${OWNER_LC}= >> new.txt
