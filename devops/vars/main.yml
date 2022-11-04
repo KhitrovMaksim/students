@@ -10,6 +10,6 @@ mysql_users:
     password: "{{ db_password }}"
     priv: "*.*:ALL"
   - name: admin
-    host: localhost"
+    host: "localhost"
     password: "{{ db_password }}"
     priv: "*.*:ALL"
