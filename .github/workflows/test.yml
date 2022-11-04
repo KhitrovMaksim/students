@@ -1,4 +1,4 @@
-name: Deploying backend
+name: Testing env
 
 on:
   workflow_dispatch:
