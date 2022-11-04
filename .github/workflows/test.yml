@@ -10,6 +10,7 @@ jobs:
       - name: set lower case owner name
         run: |
             echo "OWNER_LC=${OWNER,,}" >>${GITHUB_ENV}
+            echo "REPO=${GITHUB_REPOSITORY,,}" >>${GITHUB_ENV}
         env:
             OWNER: '${{ github.repository_owner }}'
       - name: Run
@@ -22,4 +23,5 @@ jobs:
           script: |
             rm new.txt
             echo ${{ github.repository_owner }} >> new.txt
-            echo ${OWNER_LC}= >> new.txt
+            echo ${OWNER_LC} >> new.txt
+            echo ${REPO} >> new.txt
