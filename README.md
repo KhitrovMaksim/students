@@ -30,17 +30,11 @@ After you are done, please email us the zip containing all files and the dump of
 - Create backend app (FastAPI, Python, Swagger, Alembic)
 - Create database (MySQL 8.0)
 - Create pipeline ( GitHub -> GitHub Actions -> Docker)
-# Server setup
-Host - in the email  
-## Ansible role Docker
-An Ansible Role that installs Docker and Docker Compose on the server.
-## Ansible role MySQL
-Installs and configures MySQL 8.0 on the server.  
-DB Name - Students  
-DB User - teacher  
-DB Password - in the email  
-## Ansible role SSH
-This role performs some basic security configuration on the server. It attempts to:
-- Install software to monitor bad SSH access (fail2ban)
-- Configure SSH to be more secure (disabling root login, requiring key-based authentication, and allowing a custom SSH port to be set)
-- Set up automatic updates
+
+# How to run locally
+- Run MySQL server
+- Create environment variables:
+TEST_SERVER_DB_PASSWORD - with MySQL database password
+TEST_SERVER_HOST - 127.0.0.1
+- Download project to your computer
+- 
