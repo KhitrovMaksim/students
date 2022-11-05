@@ -1,5 +1,5 @@
 # Students.
-
+![Alt text](/example.png "The main page")
 ## The task.
 
 The task has two parts:
