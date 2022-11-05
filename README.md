@@ -78,14 +78,14 @@ npm run serve
 Vue 3 (JavaScript, Options API) with bootstrap, vue cli, router, vuex, axios ...
 On local machine you may use "npm run serve" command to run or build Docker Multi-Stage Image.
 
-In GitHub Actions you may this workflow - Auto deploy frontend  - for automatic deployment on push. Or you can run this workflow manually.   
+In GitHub Actions you may use workflow - Auto deploy frontend  - for automatic deployment on push. Or you can run this workflow manually.   
 
 ## Backend.
 
 FastAPI (Python 3.9) with Swagger documentation, SQLAlchemy, Alembic (migrations)...
 On local machine you may use "uvicorn main:app --reload" command to run or build Docker Image.
 
-In GitHub Actions you may this workflow - Auto deploy backend  - for automatic deployment on push. Or you can run this workflow manually.   
+In GitHub Actions you may use workflow - Auto deploy backend  - for automatic deployment on push. Or you can run this workflow manually.   
 
 ## CI/CD.
 
