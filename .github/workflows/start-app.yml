@@ -1,4 +1,4 @@
-name: Start server
+name: Start application
 
 on:
   workflow_dispatch:

@@ -1,4 +1,4 @@
-name: Stop server
+name: Stop application
 
 on:
   workflow_dispatch:
