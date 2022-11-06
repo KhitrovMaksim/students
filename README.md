@@ -101,7 +101,7 @@ Ansible installs (by roles) on your server:
 
 ### GitHub Actions - Start / Stop application.
 
-Start - To start your application by Build and Push images in GitHub container registry, and then runs it on your server.
+Start - To start your application by Build and Push images in GitHub container registry, and then run it on your server.
 Stop - To stop your application by stopping running containers and deleting images.
 
 ### GitHub Actions - Auto deploy frontend / backend.
