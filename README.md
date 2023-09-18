@@ -1,5 +1,5 @@
 # Students.
-
+![Alt text](/example.png "The main page")
 ## The task.
 
 The task has two parts:
@@ -78,14 +78,14 @@ npm run serve
 Vue 3 (JavaScript, Options API) with bootstrap, vue cli, router, vuex, axios ...
 On local machine you may use "npm run serve" command to run or build Docker Multi-Stage Image.
 
-In GitHub Actions you may this workflow - Auto deploy frontend  - for automatic deployment on push. Or you can run this workflow manually.   
+In GitHub Actions you may use workflow - Auto deploy frontend  - for automatic deployment on push. Or you can run this workflow manually.   
 
 ## Backend.
 
 FastAPI (Python 3.9) with Swagger documentation, SQLAlchemy, Alembic (migrations)...
 On local machine you may use "uvicorn main:app --reload" command to run or build Docker Image.
 
-In GitHub Actions you may this workflow - Auto deploy backend  - for automatic deployment on push. Or you can run this workflow manually.   
+In GitHub Actions you may use workflow - Auto deploy backend  - for automatic deployment on push. Or you can run this workflow manually.   
 
 ## CI/CD.
 
@@ -101,7 +101,7 @@ Ansible installs (by roles) on your server:
 
 ### GitHub Actions - Start / Stop application.
 
-Start - To start your application by Build and Push images in GitHub container registry, and then runs it on your server.
+Start - To start your application by Build and Push images in GitHub container registry, and then run it on your server.
 Stop - To stop your application by stopping running containers and deleting images.
 
 ### GitHub Actions - Auto deploy frontend / backend.
